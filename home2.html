@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Custom Brand Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="shortcut icon" type="image/png" href="assets/logo.png">
+    <title>LedgerPulse | Bookkeeping & Fractional CFO Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* =========================
+           THEME VARIABLES - NAVY & EMERALD (FINANCIAL & CFO)
+        ========================= */
+        :root,
+        html[data-theme='light'] {
+            --color-background: #F8FAFC;
+            --color-primary-text: #0F172A;
+            --color-secondary-text: #475569;
+            --color-primary: #0F172A; /* Deep Navy Slate */
+            --color-secondary: #0D9488; /* Teal */
+            --color-accent: #059669; /* Emerald Green */
+            --color-border: #E2E8F0;
+            --color-hover: #F1F5F9;
+            --color-footer-bg: #090F1E;
+            --color-footer-text: #FFFFFF;
+            --color-card-bg: #FFFFFF;
+        }
+
+        html[data-theme='dark'] {
+            --color-background: #080D1A; /* Dark Midnight Navy */
+            --color-primary-text: #FFFFFF;
+            --color-secondary-text: #94A3B8;
+            --color-primary: #38BDF8; /* Sky Blue */
+            --color-secondary: #14B8A6; /* Teal */
+            --color-accent: #10B981; /* Emerald */
+            --color-border: #1E293B;
+            --color-hover: #111B2E;
+            --color-footer-bg: #040810;
+            --color-footer-text: #FFFFFF;
+            --color-card-bg: #0F172A; /* Slate Card */
+        }
+
+        html,
+        body {
+            background: var(--color-background);
+            color: var(--color-primary-text);
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        
+        
+        .bg-primary {
+            background-color: var(--color-primary);
+        }
+        .bg-accent {
+            background-color: var(--color-accent);
+        }
+
+        .bg-card-bg {
+            background-color: var(--color-card-bg);
+        }
+        .bg-gradient-primary-accent {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+        }
+        
+        .bg-secondary {
+            background-color: var(--color-secondary);
+        }
+        .hover\:bg-primary:hover {
+            background-color: var(--color-primary);
+        }
+        .hover\:bg-accent:hover {
+            background-color: var(--color-accent);
+        }
+        .hover\:bg-secondary:hover {
+            background-color: var(--color-secondary);
+        }
+
+        .text-primary-text {
+            color: var(--color-primary-text);
+        }
+
+        .text-secondary-text {
+            color: var(--color-secondary-text);
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        .text-primary {
+            color: var(--color-primary);
+        }
+
+        .text-secondary {
+            color: var(--color-secondary);
+        }
+
+        .bg-background {
+            background-color: var(--color-background);
+        }
+
+        .bg-hover {
+            background-color: var(--color-hover);
+        }
+
+        .border-border {
+            border-color: var(--color-border);
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+        #main-header nav {
+            background: var(--color-card-bg);
+            border-radius: 12px;
+            padding: 10px 25px;
+            margin: 0 auto;
+            max-width: 1350px;
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.1);
+        }
+
+        .header-accent {
+            color: var(--color-accent);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-link.active {
+            color: var(--color-accent);
+        }
+
+        /* Dropdowns */
+        .dropdown-wrapper {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 0.5rem;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+            min-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: 0.25s ease;
+        }
+
+        .dropdown-wrapper.open .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-wrapper.open svg {
+            transform: rotate(180deg);
+            transition: 0.25s;
+        }
+
+        .dropdown-menu a,
+        .dropdown-menu button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: var(--color-primary-text);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid var(--color-border);
+            width: 100%;
+            background: none;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:last-child,
+        .dropdown-menu button:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover,
+        .dropdown-menu button:hover {
+            background-color: var(--color-hover);
+            color: var(--color-accent);
+            padding-left: 1.25rem;
+        }
+
+        /* Subtle gap fix for Home & Restorations */
+        .home-link-gap {
+            margin-inline-end: 0.75rem;
+        }
+
+        @media (max-width: 1280px) {
+            .dropdown-menu {
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 0;
+                display: none;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .dropdown-wrapper.open .dropdown-menu {
+                display: block;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
+
+        /* GLOW & CARDS */
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(192, 57, 43, 0.1);
+        }
+
+        .glow-on-hover:hover {
+            box-shadow: 0 0 25px rgba(192, 57, 43, 0.3);
+        }
+
+        /* Marquee */
+        .testimonial-marquee {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 30s linear infinite;
+        }
+
+        .testimonial-card {
+            flex: 0 0 auto;
+            margin-right: 24px;
+            background: var(--color-card-bg);
+            border-radius: 1rem;
+            width: 320px;
+        }
+
+        @keyframes marqueeScroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .testimonial-marquee:hover .marquee-track {
+            animation-play-state: paused;
+        }
+
+        /* Circles */
+        .circle-card {
+            width: 180px;
+            height: 180px;
+            background: var(--color-card-bg);
+            border-radius: 50%;
+            border: 3px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .4s ease;
+            margin: auto;
+        }
+
+        .circle-card:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(192, 57, 43, 0.4);
+            border-color: var(--color-accent);
+        }
+
+        .circle-inner h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--color-accent);
+        }
+
+        /* Project overlay */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            transition: all 0.4s ease;
+            background: var(--color-card-bg);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(156, 44, 29, 0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: scale(1.03);
+        }
+
+        /* Articles */
+        .article-card {
+            transition: all 0.3s ease;
+            background: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(156, 44, 29, 0.12);
+        }
+
+        .article-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .article-card:hover .article-image {
+            transform: scale(1.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding-bottom: 0.1em;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-background) !important;
+            border: 2px solid var(--color-primary);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-secondary);
+            border-color: var(--color-secondary);
+            color: var(--color-background) !important;
+            box-shadow: 0 10px 20px -5px rgba(176, 141, 87, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: transparent;
+            color: var(--color-accent) !important;
+            border: 2px solid var(--color-accent);
+            transition: all 0.3s ease;
+        }
+
+        .btn-accent:hover {
+            background-color: var(--color-accent);
+            color: var(--color-background) !important;
+            border-color: var(--color-accent);
+            box-shadow: 0 10px 20px -5px rgba(176, 141, 87, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .particle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: floatParticle 12s infinite ease-in-out;
+        }
+
+        @keyframes floatParticle {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
+        }
+
+        .footer-link {
+            color: #ffffff;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--color-accent);
+        }
+
+        @media (max-width: 768px) {
+            .circle-card {
+                width: 140px;
+                height: 140px;
+            }
+
+            .circle-inner h3 {
+                font-size: 2rem;
+            }
+
+            .circle-cards-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 20px !important;
+            }
+
+            .project-overlay {
+                opacity: 1 !important;
+                background: linear-gradient(to top, rgba(156, 44, 29, 0.85), rgba(156, 44, 29, 0.4), transparent);
+            }
+        }
+
+        @media (max-width: 1280px) {
+            .circle-cards-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 24px !important;
+                justify-items: center;
+            }
+        }
+    
+        /* RTL Dropdown alignment override */
+        html[dir="rtl"] .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <header class="fixed top-3 left-0 w-full z-50 px-4 sm:px-6" id="main-header">
+        <nav class="mx-auto max-w-[1350px] px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between h-14 rounded-xl shadow-xl border border-border bg-card-bg"
+            style="background-color: var(--color-card-bg);">
+            <a href="index.html" class="flex items-center gap-3 shrink-0 group py-1">
+                <!-- Exact Brand Logo Icon -->
+                <div class="relative w-10 h-10 rounded-xl bg-white p-1 shadow-md shadow-emerald-900/10 border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                    <img src="assets/logo.png" alt="LedgerPulse Logo" class="w-full h-full object-contain">
+                </div>
+                <!-- Brand Typography -->
+                <div class="flex flex-col text-left leading-tight">
+                    <span class="text-xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400 flex items-center font-sans">
+                        LedgerPulse
+                    </span>
+                    <span class="text-[9.5px] uppercase tracking-[0.16em] text-secondary-text font-semibold">
+                        CFO & Advisory
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation (Centered) -->
+            <div class="hidden xl:flex items-center justify-center flex-1 px-8">
+                <div class="flex space-x-6 rtl:space-x-reverse text-primary-text font-medium">
+                    <div class="dropdown-wrapper home-link-gap">
+                        <button class="nav-link flex items-center dropdown-toggle">Home <svg
+                                class="w-3 h-3 ml-1.5 transition-transform" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg></button>
+                        <div class="dropdown-menu">
+                            <a href="index.html">Home 1</a>
+                            <a href="home2.html">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="services.html" class="nav-link">Services</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <a href="case-studies.html" class="nav-link">Case Studies</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <div class="dropdown-wrapper">
+                        <button class="nav-link flex items-center dropdown-toggle">Dashboard <svg class="w-3 h-3 ml-1.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                        <div class="dropdown-menu">
+                            <a href="admin-dashboard.html">Admin Dashboard</a>
+                            <a href="user-dashboard.html">User Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Actions (Icons) -->
+            <div class="hidden xl:flex items-center space-x-3 rtl:space-x-reverse shrink-0">
+                <!-- Login Link -->
+                <div class="flex items-center space-x-3 rtl:space-x-reverse mr-2">
+                    <a href="login.html" class="btn-accent px-4 py-1.5 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </a>
+                </div>
+
+                <button id="theme-toggle"
+                    class="icon-btn text-primary hover:text-accent p-1.5 rounded-full transition duration-200">
+                    <svg class="w-5 h-5 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
+                    </svg>
+                    <svg class="w-5 h-5 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
+                    </svg>
+                </button>
+                <button id="lang-icon" class="text-primary hover:text-accent p-1.5 rounded-full transition duration-200"
+                    title="RTL/LTR">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center xl:hidden">
+                <button id="mobile-menu-open" class="icon-btn text-primary hover:text-accent p-1.5 rounded-full">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu-drawer" class="fixed inset-0 z-50 pointer-events-none transition-all duration-300">
+        <div id="drawer-backdrop"
+            class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+        <div id="drawer-content"
+            class="absolute top-0 left-0 right-0 bg-background rounded-b-2xl shadow-2xl p-6 xl:hidden max-h-[80vh] overflow-y-auto transform translate-y-[-100%] transition-transform duration-300 ease-out">
+            <div class="flex justify-between items-center pb-4 border-b border-border">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-xl bg-white p-1 shadow-sm border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden">
+                        <img src="assets/logo.png" alt="LedgerPulse Logo" class="w-full h-full object-contain">
+                    </div>
+                    <div class="flex flex-col text-left leading-tight">
+                        <span class="text-lg font-bold tracking-tight text-emerald-600 dark:text-emerald-400 font-sans">
+                            LedgerPulse
+                        </span>
+                        <span class="text-[9px] uppercase tracking-wider text-secondary-text font-semibold">
+                            CFO & Advisory
+                        </span>
+                    </div>
+                </a>
+                <button id="mobile-menu-close" class="text-primary hover:text-accent p-1.5 rounded-full"><svg
+                        class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg></button>
+            </div>
+            <nav class="flex flex-col space-y-2 py-4">
+                <div>
+                    <button
+                        class="block text-primary-text font-semibold text-lg hover:text-accent py-2 w-full text-left flex justify-between items-center"
+                        id="mobile-homes-toggle">Home <svg class="w-4 h-4 transform transition-transform"
+                            id="homes-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg></button>
+                    <div id="mobile-homes-menu"
+                        class="hidden pl-4 flex flex-col space-y-1 mt-1 border-l-2 border-border">
+                        <a href="index.html" class="text-secondary hover:text-accent py-1 px-2">Home 1</a>
+                        <a href="home2.html" class="text-secondary hover:text-accent py-1 px-2">Home 2</a>
+                    </div>
+                </div>
+                <a href="services.html" class="text-primary-text font-semibold text-lg hover:text-accent py-2">Services</a>
+                <a href="pricing.html" class="text-primary-text font-semibold text-lg hover:text-accent py-2">Pricing</a>
+                <a href="case-studies.html" class="text-primary-text font-semibold text-lg hover:text-accent py-2">Case Studies</a>
+                <a href="about.html" class="text-primary-text font-semibold text-lg hover:text-accent py-2">About</a>
+                <a href="contact.html" class="text-primary-text font-semibold text-lg hover:text-accent py-2">Contact</a>
+                <div>
+                    <button class="block text-primary-text font-semibold text-lg hover:text-accent py-2 w-full text-left flex justify-between items-center" id="mobile-dashboard-toggle">Dashboard <svg class="w-4 h-4 transform transition-transform" id="dashboard-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                    <div id="mobile-dashboard-menu" class="hidden pl-4 flex flex-col space-y-1 mt-1 border-l-2 border-border">
+                        <a href="admin-dashboard.html" class="text-secondary hover:text-accent py-1 px-2">Admin Dashboard</a>
+                        <a href="user-dashboard.html" class="text-secondary hover:text-accent py-1 px-2">User Dashboard</a>
+                    </div>
+                </div>
+                <!-- Login inside mobile header -->
+                <div class="pt-3 mt-2 border-t border-border flex gap-3">
+                    <a href="login.html"
+                        class="flex-1 py-2.5 rounded-lg border border-accent text-accent hover:bg-accent hover:text-white transition font-medium flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </a>
+                </div>
+            </nav>
+            <div class="bottom-icons pt-4 border-t border-border mt-4 flex justify-center items-center gap-8">
+
+                <!-- Theme Toggle (same style as navbar) -->
+                <button id="mobile-theme-toggle"
+                    class="icon-btn text-primary hover:text-accent p-1.5 rounded-full transition duration-200">
+                    <svg class="w-6 h-6 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
+                    </svg>
+                    <svg class="w-6 h-6 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
+                    </svg>
+                </button>
+
+                <!-- RTL -->
+                <button id="mobile-lang-icon"
+                    class="icon-btn text-primary hover:text-accent p-1.5 rounded-full transition duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                </button>
+
+            </div>
+        </div>
+    </div>
+<main class="relative pt-16 sm:pt-20">
+
+    <!-- SECTION 1: HERO — Compact Split Layout -->
+    <section class="relative py-10 sm:py-14 lg:py-16 bg-background overflow-hidden border-b border-border">
+        <!-- Ambient Background Accents -->
+        <div class="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[350px] h-[350px] rounded-full bg-sky-500/10 blur-3xl pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+                
+                <!-- Side 1: Text Content Column (6 cols) -->
+                <div class="lg:col-span-6 space-y-4 text-center lg:text-left flex flex-col items-center lg:items-start max-w-2xl mx-auto lg:max-w-none">
+                    <!-- Pill Tag -->
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Executive Financial Leadership
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-primary-text leading-[1.15]">
+                        Fractional CFO expertise to <span class="text-emerald-600 dark:text-emerald-400">scale with conviction.</span>
+                    </h1>
+
+                    <!-- Paragraph -->
+                    <p class="text-sm sm:text-base text-secondary-text leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        Senior-level financial strategy, cash runway engineering, and board-ready forecasting — without the overhead of a $350k+ full-time executive hire.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 pt-1 w-full sm:w-auto">
+                        <a href="contact.html" class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-2.5 rounded-lg shadow-md shadow-emerald-600/20 transition duration-200 text-xs sm:text-sm">
+                            <span>Book CFO Advisory Call</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                        <a href="pricing.html" class="inline-flex items-center justify-center gap-2 border border-border hover:bg-hover text-primary-text font-semibold px-5 py-2.5 rounded-lg transition duration-200 text-xs sm:text-sm">
+                            <span>View CFO Packages</span>
+                        </a>
+                    </div>
+
+                    <!-- Client Trust & Stats -->
+                    <div class="pt-4 border-t border-border flex flex-wrap items-center justify-center lg:justify-start gap-6 w-full">
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold text-primary-text">$180M+</div>
+                            <div class="text-[11px] text-secondary-text">Client Capital Managed</div>
+                        </div>
+                        <div class="h-7 w-px bg-border hidden sm:block"></div>
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold text-emerald-600 dark:text-emerald-400">13-Wk</div>
+                            <div class="text-[11px] text-secondary-text">Rolling Cash Modeling</div>
+                        </div>
+                        <div class="h-7 w-px bg-border hidden sm:block"></div>
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold text-sky-600 dark:text-sky-400">4.2x</div>
+                            <div class="text-[11px] text-secondary-text">Avg. ROI on Strategy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side 2: Image & Live Floating Metric Overlay Column (6 cols) -->
+                <div class="lg:col-span-6 relative w-full max-w-2xl mx-auto lg:max-w-none">
+                    <!-- Main Hero Photograph in Proportional Executive Frame -->
+                    <div class="relative rounded-2xl overflow-hidden border border-border shadow-xl bg-card-bg">
+                        <img src="assets/hero-cfo-home2.jpg" 
+                             alt="Fractional CFO reviewing capital allocation strategy with founder" 
+                             class="w-full h-[280px] sm:h-[340px] lg:h-[370px] object-cover object-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: FRACTIONAL CFO PILLARS — Visual Architecture Cards -->
+    <section class="py-14 sm:py-16 lg:py-20 bg-hover border-y border-border">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-accent block mb-2">Strategic Core</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-text mb-3">What your Fractional CFO delivers</h2>
+                <p class="text-sm sm:text-base text-secondary-text leading-relaxed">High-leverage executive guidance designed to extend your runway, optimize margins, and prepare for growth.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto items-stretch">
+                <!-- Card 1 -->
+                <div class="group relative rounded-2xl overflow-hidden border border-border bg-card-bg shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+                    <div class="h-44 sm:h-48 overflow-hidden relative shrink-0">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" alt="Cash flow modeling and runway management" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-3.5 -mt-9 relative z-10 border-2 border-card-bg shadow-sm">
+                                <i class="fa-solid fa-compass text-emerald-600 dark:text-emerald-400 text-sm"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-primary-text mb-2 min-h-[44px] flex items-center">Cash Flow &amp; Runway Modeling</h3>
+                            <p class="text-xs sm:text-[13px] text-secondary-text leading-relaxed">Weekly 13-week dynamic rolling forecasts simulating hires, downturns, and expansion scenarios.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group relative rounded-2xl overflow-hidden border border-border bg-card-bg shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+                    <div class="h-44 sm:h-48 overflow-hidden relative shrink-0">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" alt="Budget vs Actual performance analysis" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-900/40 flex items-center justify-center mb-3.5 -mt-9 relative z-10 border-2 border-card-bg shadow-sm">
+                                <i class="fa-solid fa-chart-pie text-teal-600 dark:text-teal-400 text-sm"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-primary-text mb-2 min-h-[44px] flex items-center">Budget vs. Actual Variance</h3>
+                            <p class="text-xs sm:text-[13px] text-secondary-text leading-relaxed">Monthly operational diagnostics that pinpoint margin leaks and unit economic shifts before they hurt.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group relative rounded-2xl overflow-hidden border border-border bg-card-bg shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+                    <div class="h-44 sm:h-48 overflow-hidden relative shrink-0">
+                        <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?q=80&w=600&auto=format&fit=crop" alt="Capital allocation and fundraising advisory" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-3.5 -mt-9 relative z-10 border-2 border-card-bg shadow-sm">
+                                <i class="fa-solid fa-coins text-emerald-600 dark:text-emerald-400 text-sm"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-primary-text mb-2 min-h-[44px] flex items-center">Capital &amp; Debt Structuring</h3>
+                            <p class="text-xs sm:text-[13px] text-secondary-text leading-relaxed">Strategic support for venture rounds, bank lines of credit, debt covenants, and valuation optimization.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="group relative rounded-2xl overflow-hidden border border-border bg-card-bg shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+                    <div class="h-44 sm:h-48 overflow-hidden relative shrink-0">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=600&auto=format&fit=crop" alt="Board decks and executive partner sessions" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-900/40 flex items-center justify-center mb-3.5 -mt-9 relative z-10 border-2 border-card-bg shadow-sm">
+                                <i class="fa-solid fa-users-viewfinder text-teal-600 dark:text-teal-400 text-sm"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-primary-text mb-2 min-h-[44px] flex items-center">Board Decks &amp; Executive Calls</h3>
+                            <p class="text-xs sm:text-[13px] text-secondary-text leading-relaxed">Institutional reporting packages and live presence in executive and board meetings to defend your numbers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: CFO IMPACT BENTO — Deep Strategic Value -->
+    <section class="py-14 sm:py-16 lg:py-20 bg-background">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-accent block mb-2">Executive Impact</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-text mb-3">Where numbers become strategy</h2>
+                <p class="text-sm sm:text-base text-secondary-text leading-relaxed">Moving past backward-looking accounting into actionable commercial roadmaps.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+                <!-- Large Featured Card -->
+                <div class="md:col-span-2 lg:col-span-2 relative rounded-2xl overflow-hidden border border-border shadow-md group min-h-[260px]">
+                    <img src="assets/b1.jpg" alt="Fractional CFO dashboard modeling runway" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-slate-950/90 via-slate-900/60 to-transparent"></div>
+                    <div class="relative z-10 h-full flex flex-col justify-end p-6 sm:p-8">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-400 mb-2">CFO Predictive Engine</span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">Real-Time Scenario &amp; Stress Testing</h3>
+                        <p class="text-xs sm:text-sm text-white/80 leading-relaxed max-w-md">Simulate market contractions, hire ramp-ups, or R&amp;D investments before committing capital.</p>
+                    </div>
+                </div>
+
+                <!-- Card 1: Unit Economics & Pricing -->
+                <div class="bg-card-bg rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <div class="h-36 overflow-hidden relative">
+                        <img src="assets/b2.jpg" 
+                             alt="Unit Economics & Pricing Analysis" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-bold text-primary-text mb-1.5">Unit Economics &amp; Pricing</h3>
+                            <p class="text-xs text-secondary-text leading-relaxed">Analyze contribution margins, LTV:CAC, and gross margin floors to maximize bottom-line profit.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Weekly Executive Standups -->
+                <div class="bg-card-bg rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <div class="h-36 overflow-hidden relative">
+                        <img src="assets/b3.jpg" 
+                             alt="Weekly Executive Standups" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-bold text-primary-text mb-1.5">Weekly Executive Standups</h3>
+                            <p class="text-xs text-secondary-text leading-relaxed">Direct Slack/email access and dedicated weekly advisory calls to keep executive decisions aligned.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Fundraise & Due Diligence -->
+                <div class="bg-card-bg rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <div class="h-36 overflow-hidden relative">
+                        <img src="assets/b4.jpg" 
+                             alt="Fundraise & Due Diligence" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-bold text-primary-text mb-1.5">Fundraise &amp; Due Diligence</h3>
+                            <p class="text-xs text-secondary-text leading-relaxed">Audited financial models, clean cap-table sync, and investor pitch deck metrics that close rounds.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Strategic Tax & Audit Shield -->
+                <div class="bg-card-bg rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group">
+                    <div class="h-36 overflow-hidden relative">
+                        <img src="assets/b5.jpg" 
+                             alt="Strategic Tax & Audit Shield" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-bold text-primary-text mb-1.5">Strategic Tax &amp; Audit Shield</h3>
+                            <p class="text-xs text-secondary-text leading-relaxed">Coordinated CPA strategies, R&amp;D tax credit harvesting, and year-end compliance shielding.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: PROCESS — How We Integrate As Your CFO -->
+    <section class="py-14 sm:py-16 lg:py-20 bg-hover border-y border-border">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-accent block mb-2">Seamless Onboarding</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-text mb-3">How we step in as your CFO team</h2>
+                <p class="text-sm sm:text-base text-secondary-text leading-relaxed">From initial diagnostic to running your board meetings in less than 30 days.</p>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-8 sm:space-y-12">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 items-center">
+                    <div class="sm:text-right order-2 sm:order-1">
+                        <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent text-white font-bold text-lg mb-4">01</div>
+                        <h3 class="text-lg sm:text-xl font-bold text-primary-text mb-2">Financial Health &amp; Model Audit</h3>
+                        <p class="text-sm text-secondary-text leading-relaxed">We evaluate your chart of accounts, historical unit economics, cash burn rate, and identify hidden margin leaks.</p>
+                    </div>
+                    <div class="order-1 sm:order-2 rounded-xl overflow-hidden border border-border shadow-md">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop" alt="CFO model audit session" class="w-full h-auto aspect-[4/3] object-cover">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 items-center">
+                    <div class="order-1 sm:order-2 sm:text-left">
+                        <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent text-white font-bold text-lg mb-4">02</div>
+                        <h3 class="text-lg sm:text-xl font-bold text-primary-text mb-2">Forward Forecast &amp; KPI Engine</h3>
+                        <p class="text-sm text-secondary-text leading-relaxed">We construct your dynamic 13-week cash runway model and establish weekly executive KPI dashboards.</p>
+                    </div>
+                    <div class="order-2 sm:order-1 rounded-xl overflow-hidden border border-border shadow-md">
+                        <img src="https://images.unsplash.com/photo-1554224155-1696413565d3?q=80&w=800&auto=format&fit=crop" alt="Forecasting architecture setup" class="w-full h-auto aspect-[4/3] object-cover">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 items-center">
+                    <div class="sm:text-right order-2 sm:order-1">
+                        <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent text-white font-bold text-lg mb-4">03</div>
+                        <h3 class="text-lg sm:text-xl font-bold text-primary-text mb-2">Executive Advisory Cadence</h3>
+                        <p class="text-sm text-secondary-text leading-relaxed">We run monthly strategy sessions, attend board meetings, and guide key capital decisions week in and week out.</p>
+                    </div>
+                    <div class="order-1 sm:order-2 rounded-xl overflow-hidden border border-border shadow-md">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop" alt="CFO executive partner meeting" class="w-full h-auto aspect-[4/3] object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: TRUST — Founder & CEO Feedback -->
+    <section class="py-14 sm:py-16 lg:py-20 bg-background">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+                <span class="text-xs font-bold uppercase tracking-wider text-accent block mb-2">Client Results</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-text mb-3">What Founders Say About Our CFO Partnership</h2>
+                <p class="text-sm sm:text-base text-secondary-text leading-relaxed">How fractional financial leadership reshapes high-growth businesses.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-5 max-w-6xl mx-auto">
+                <div class="lg:col-span-3 bg-card-bg rounded-2xl overflow-hidden border border-border shadow-md flex flex-col">
+                    <div class="h-52 sm:h-64 overflow-hidden">
+                        <img src="assets/bb1.jpg" alt="High growth founder testimonial" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex gap-1 mb-3">
+                                <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+                            </div>
+                            <p class="text-base sm:text-lg text-primary-text italic leading-relaxed mb-5">"Hiring a full-time CFO wasn't justifiable at our stage, but we were flying blind with cash burn. LedgerPulse's Fractional CFO restructured our supplier contracts, extended our runway by 7 months, and helped us close our $4.5M Series A."</p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-border">
+                            <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-accent shrink-0">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop" alt="Founder portrait" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold text-primary-text">Chief Executive Officer</div>
+                                <div class="text-xs text-secondary-text">B2B SaaS Enterprise · 34 employees</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 flex flex-col gap-5">
+                    <div class="bg-card-bg rounded-xl p-5 border border-border shadow-sm flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex gap-1 mb-2">
+                                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                            </div>
+                            <p class="text-sm text-primary-text leading-relaxed mb-3">"Their CFO joined our monthly board meeting and answered every investor question with effortless authority. It completely elevated our credibility."</p>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-full overflow-hidden border border-border shrink-0">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" alt="Client" class="w-full h-full object-cover">
+                            </div>
+                            <div class="text-xs">
+                                <div class="font-bold text-primary-text">Co-Founder &amp; COO</div>
+                                <div class="text-secondary-text">Direct-to-Consumer Brand</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-card-bg rounded-xl p-5 border border-border shadow-sm flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex gap-1 mb-2">
+                                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                            </div>
+                            <p class="text-sm text-primary-text leading-relaxed mb-3">"A seasoned CFO on call without the $350k salary commitment. The ROI has been at least 5x in cost optimization alone."</p>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-full overflow-hidden border border-border shrink-0">
+                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop" alt="Client" class="w-full h-full object-cover">
+                            </div>
+                            <div class="text-xs">
+                                <div class="font-bold text-primary-text">Managing Partner</div>
+                                <div class="text-secondary-text">Healthcare Practice Group</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-card-bg rounded-xl p-4 border border-border shadow-sm text-center">
+                            <div class="text-xl font-bold text-accent">$180M+</div>
+                            <div class="text-[10px] uppercase tracking-wider text-secondary-text mt-1">Capital Guided</div>
+                        </div>
+                        <div class="bg-card-bg rounded-xl p-4 border border-border shadow-sm text-center">
+                            <div class="text-xl font-bold text-accent">7.2 Mos</div>
+                            <div class="text-[10px] uppercase tracking-wider text-secondary-text mt-1">Avg Runway Added</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: FINAL CTA — CFO Consultation Panel -->
+    <section class="py-14 sm:py-16 lg:py-20 bg-primary relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-80 h-80 rounded-full bg-accent/15 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-secondary/15 blur-3xl"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <span class="text-xs font-bold uppercase tracking-wider text-accent block mb-2">Take Control Of Your Capital</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Ready for board-level financial clarity?</h2>
+                    <p class="text-sm sm:text-base text-white/75 leading-relaxed mb-6 max-w-md mx-auto lg:mx-0">Schedule an exploratory 30-minute consultation with a senior Fractional CFO. We'll diagnose your runway and outline strategic leverage points with zero obligation.</p>
+                    <ul class="space-y-3 inline-block text-left">
+                        <li class="flex items-center gap-2.5 text-sm text-white/85"><i class="fa-solid fa-circle-check text-accent text-xs"></i> 30-minute executive diagnostic call</li>
+                        <li class="flex items-center gap-2.5 text-sm text-white/85"><i class="fa-solid fa-circle-check text-accent text-xs"></i> No long-term lock-in contracts</li>
+                        <li class="flex items-center gap-2.5 text-sm text-white/85"><i class="fa-solid fa-circle-check text-accent text-xs"></i> Dedicated senior CFO partner assigned</li>
+                    </ul>
+                </div>
+                <div class="bg-card-bg rounded-2xl p-6 sm:p-8 border border-border shadow-2xl">
+                    <h3 class="text-base font-bold text-primary-text mb-5 text-center">Schedule Your CFO Consultation</h3>
+                    <form class="space-y-3">
+                        <input type="text" placeholder="Your Name & Title" class="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-primary-text placeholder:text-secondary-text outline-none focus:ring-2 focus:ring-accent/40">
+                        <input type="email" placeholder="Work Email" class="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-primary-text placeholder:text-secondary-text outline-none focus:ring-2 focus:ring-accent/40">
+                        <input type="text" placeholder="Annual Revenue / Funding Stage" class="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-primary-text placeholder:text-secondary-text outline-none focus:ring-2 focus:ring-accent/40">
+                        <button type="button" class="btn-primary w-full py-3 rounded-lg text-sm font-semibold">Request CFO Strategy Call</button>
+                    </form>
+                    <p class="text-[10px] text-secondary-text text-center mt-3">Strict NDA protection. Confidential consultation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+    <!-- Footer Vintage Style -->
+    <footer id="main-footer" class="pt-14 transition-colors duration-300"
+        style="background-color: var(--color-footer-bg);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8 pb-10 border-b border-slate-700">
+                <div class="col-span-2 md:col-span-2">
+                    <a href="index.html" class="flex items-center gap-3 mb-4 group inline-flex">
+                        <div class="w-11 h-11 rounded-xl bg-white p-1 shadow-md border border-slate-700 flex items-center justify-center overflow-hidden">
+                            <img src="assets/logo.png" alt="LedgerPulse Logo" class="w-full h-full object-contain">
+                        </div>
+                        <div class="flex flex-col text-left leading-tight">
+                            <span class="text-xl font-bold tracking-tight text-emerald-400 font-sans">
+                                LedgerPulse
+                            </span>
+                            <span class="text-[9.5px] uppercase tracking-[0.16em] text-slate-300 font-semibold">
+                                CFO & Advisory
+                            </span>
+                        </div>
+                    </a>
+                    <p class="text-sm leading-relaxed max-w-xs text-slate-300">Empowering growing businesses and startups with clear bookkeeping, forecasting, and fractional CFO advisory for confident financial decisions.</p>
+                    <div class="flex space-x-4 rtl:space-x-reverse mt-6">
+                        <a href="#" class="text-slate-300 hover:text-accent transition"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-slate-300 hover:text-accent transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-slate-300 hover:text-accent transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-4 text-accent">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="footer-link">Full-Charge Bookkeeping</a></li>
+                        <li><a href="services.html" class="footer-link">Fractional CFO Advisory</a></li>
+                        <li><a href="services.html" class="footer-link">Cash Flow Forecasting</a></li>
+                        <li><a href="services.html" class="footer-link">Tax Readiness & Reporting</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-4 text-accent">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="services.html" class="footer-link">Services</a></li>
+                        <li><a href="pricing.html" class="footer-link">Pricing Plans</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-2 lg:col-span-1">
+                    <h4 class="font-medium text-lg mb-4 text-accent">Financial Insights</h4>
+                    <p class="max-w-3xl text-sm mb-4 text-slate-300">Get monthly CFO briefings, tax alerts, and cash flow playbooks.</p>
+                    <input type="email" placeholder="Your business email"
+                        class="p-3 text-sm rounded-lg w-full bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-accent text-white outline-none">
+                    <button class="btn-accent font-semibold py-3 rounded-lg w-full mt-3">Subscribe</button>
+                </div>
+            </div>
+            <div class="py-4 text-center text-xs text-slate-300">&copy; 2026 LedgerPulse Bookkeeping & Fractional CFO Services. All rights reserved. | <span class="hover:text-accent cursor-pointer">Privacy Policy</span> | <span class="hover:text-accent cursor-pointer">Terms of Service</span></div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const html = document.documentElement;
+            
+            // Active Nav Links (Dynamic)
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            
+            // Desktop Links
+            document.querySelectorAll('.nav-link, .dropdown-menu a').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href !== '#' && href === currentPath) {
+                    link.classList.add('active');
+                    link.style.color = 'var(--color-accent)';
+                    const parentBtn = link.closest('.dropdown-wrapper')?.querySelector('.dropdown-toggle');
+                    if (parentBtn) {
+                        parentBtn.classList.add('active');
+                        parentBtn.style.color = 'var(--color-accent)';
+                    }
+                }
+            });
+
+            // Mobile Links
+            document.querySelectorAll('#drawer-content a, #drawer-content button.block').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href !== '#' && href === currentPath) {
+                    if (link.classList.contains('py-1')) {
+                        link.classList.remove('text-secondary');
+                        link.classList.add('text-accent');
+                        const parentBtn = link.closest('div')?.previousElementSibling;
+                        if (parentBtn && parentBtn.tagName === 'BUTTON') {
+                            parentBtn.classList.remove('text-primary-text');
+                            parentBtn.classList.add('text-accent');
+                        }
+                    } else {
+                        link.classList.remove('text-primary-text');
+                        link.classList.add('text-accent');
+                    }
+                }
+            });
+
+            // Dropdown toggles
+            document.querySelectorAll(".dropdown-wrapper").forEach(dropdown => {
+                const btn = dropdown.querySelector(".dropdown-toggle");
+                dropdown.addEventListener("mouseenter", () => { if (window.innerWidth > 1280) dropdown.classList.add("open"); });
+                dropdown.addEventListener("mouseleave", () => { if (window.innerWidth > 1280) dropdown.classList.remove("open"); });
+                if (btn && window.innerWidth <= 1280) btn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); dropdown.classList.toggle("open"); });
+            });
+            document.addEventListener("click", e => { document.querySelectorAll(".dropdown-wrapper").forEach(d => { if (!d.contains(e.target)) d.classList.remove("open"); }); });
+
+            // Theme
+            const themeToggle = document.getElementById('theme-toggle'), mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            const applyTheme = (theme) => { html.setAttribute('data-theme', theme); document.querySelectorAll('.light-icon').forEach(i => i.classList.toggle('hidden', theme === 'dark')); document.querySelectorAll('.dark-icon').forEach(i => i.classList.toggle('hidden', theme === 'light')); localStorage.setItem('theme', theme); };
+            const initTheme = () => { const stored = localStorage.getItem('theme'); const pref = window.matchMedia('(prefers-color-scheme: dark)').matches; applyTheme(stored === 'dark' || (!stored && pref) ? 'dark' : 'light'); };
+            const toggleTheme = () => { const cur = html.getAttribute('data-theme'); applyTheme(cur === 'light' ? 'dark' : 'light'); };
+            themeToggle?.addEventListener('click', toggleTheme); mobileThemeToggle?.addEventListener('click', toggleTheme); initTheme();
+
+            // Language RTL
+            const langBtn = document.getElementById('lang-icon'), mobileLang = document.getElementById('mobile-lang-icon');
+            const toggleLang = () => { const isRTL = html.getAttribute('dir') === 'rtl'; html.setAttribute('dir', isRTL ? 'ltr' : 'rtl'); localStorage.setItem('language', isRTL ? 'en' : 'ar'); };
+            if (langBtn) langBtn.addEventListener('click', toggleLang);
+            if (mobileLang) mobileLang.addEventListener('click', toggleLang);
+            const savedDir = localStorage.getItem('language') === 'ar' ? 'rtl' : 'ltr'; html.setAttribute('dir', savedDir);
+
+            // Mobile drawer
+            const drawer = document.getElementById('mobile-menu-drawer'), backdrop = document.getElementById('drawer-backdrop'), content = document.getElementById('drawer-content'), openBtn = document.getElementById('mobile-menu-open'), closeBtn = document.getElementById('mobile-menu-close');
+            const openDrawer = () => { drawer.classList.remove('pointer-events-none'); content.classList.remove('translate-y-[-100%]'); backdrop.classList.add('opacity-50', 'pointer-events-auto'); document.body.style.overflow = 'hidden'; };
+            const closeDrawer = () => { content.classList.add('translate-y-[-100%]'); backdrop.classList.remove('opacity-50', 'pointer-events-auto'); content.addEventListener('transitionend', () => { drawer.classList.add('pointer-events-none'); document.body.style.overflow = ''; }, { once: true }); };
+            openBtn?.addEventListener('click', openDrawer); closeBtn?.addEventListener('click', closeDrawer); backdrop?.addEventListener('click', closeDrawer);
+            document.getElementById('mobile-homes-toggle')?.addEventListener('click', () => { document.getElementById('mobile-homes-menu')?.classList.toggle('hidden'); document.getElementById('homes-icon')?.classList.toggle('rotate-180'); });
+            document.getElementById('mobile-dashboard-toggle')?.addEventListener('click', () => { document.getElementById('mobile-dashboard-menu')?.classList.toggle('hidden'); document.getElementById('dashboard-icon')?.classList.toggle('rotate-180'); });
+
+            // Particles
+            const particlesDiv = document.getElementById('particles'); if (particlesDiv) for (let i = 0; i < 35; i++) { let p = document.createElement('div'); p.classList.add('particle'); let size = Math.random() * 6 + 2; p.style.width = size + 'px'; p.style.height = size + 'px'; p.style.left = Math.random() * 100 + '%'; p.style.top = Math.random() * 100 + '%'; p.style.animationDelay = Math.random() * 5 + 's'; p.style.animationDuration = Math.random() * 12 + 8 + 's'; particlesDiv.appendChild(p); }
+            // Scroll reveal
+            const reveals = document.querySelectorAll('.reveal'); const revealScroll = () => { reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active'); }); }; window.addEventListener('scroll', revealScroll); revealScroll();
+            // Marquee duplication
+            const track = document.querySelector('.marquee-track'); if (track) track.innerHTML += track.innerHTML;
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Custom Brand Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="shortcut icon" type="image/png" href="assets/logo.png">
+    <title>404 — Page Not Found | LedgerPulse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root,
+        html[data-theme='light'] {
+            --color-background: #F8FAFC;
+            --color-primary-text: #0F172A;
+            --color-secondary-text: #475569;
+            --color-primary: #0F172A;
+            --color-secondary: #0D9488;
+            --color-accent: #059669;
+            --color-border: #E2E8F0;
+            --color-hover: #F1F5F9;
+            --color-footer-bg: #090F1E;
+            --color-footer-text: #FFFFFF;
+            --color-card-bg: #FFFFFF;
+        }
+
+        html[data-theme='dark'] {
+            --color-background: #080D1A;
+            --color-primary-text: #FFFFFF;
+            --color-secondary-text: #94A3B8;
+            --color-primary: #38BDF8;
+            --color-secondary: #14B8A6;
+            --color-accent: #10B981;
+            --color-border: #1E293B;
+            --color-hover: #111B2E;
+            --color-footer-bg: #040810;
+            --color-footer-text: #FFFFFF;
+            --color-card-bg: #0F172A;
+        }
+
+        html,
+        body {
+            background: var(--color-background);
+            color: var(--color-primary-text);
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        .bg-primary { background-color: var(--color-primary); }
+        .bg-accent { background-color: var(--color-accent); }
+        .bg-card-bg { background-color: var(--color-card-bg); }
+        .bg-background { background-color: var(--color-background); }
+        .bg-hover { background-color: var(--color-hover); }
+        .bg-gradient-primary-accent { background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); }
+
+        .text-primary-text { color: var(--color-primary-text); }
+        .text-secondary-text { color: var(--color-secondary-text); }
+        .text-accent { color: var(--color-accent); }
+        .text-primary { color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); }
+
+        .border-border { border-color: var(--color-border); }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link:hover { color: var(--color-accent); }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding-bottom: 0.1em;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-background) !important;
+            border: 2px solid var(--color-primary);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: var(--color-secondary);
+            border-color: var(--color-secondary);
+            color: var(--color-background) !important;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: transparent;
+            color: var(--color-accent) !important;
+            border: 2px solid var(--color-accent);
+            transition: all 0.3s ease;
+        }
+        .btn-accent:hover {
+            background-color: var(--color-accent);
+            color: var(--color-background) !important;
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
+        }
+        .float-slow { animation: floatSlow 6s ease-in-out infinite; }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+        .pulse-glow { animation: pulseGlow 5s ease-in-out infinite; }
+
+        .footer-link {
+            color: #ffffff;
+            transition: color 0.3s;
+        }
+        .footer-link:hover { color: var(--color-accent); }
+
+        .big-404 {
+            font-size: clamp(5rem, 18vw, 12rem);
+            line-height: 1;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- HEADER (simplified but theme-aware) -->
+    <header class="fixed top-3 left-0 w-full z-50 px-4 sm:px-6" id="main-header">
+        <nav class="mx-auto max-w-[1350px] px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between h-14 rounded-xl shadow-xl border border-border bg-card-bg">
+            <a href="index.html" class="flex items-center gap-3 shrink-0 group py-1">
+                <div class="relative w-10 h-10 rounded-xl bg-white p-1 shadow-md border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                    <img src="assets/logo.png" alt="LedgerPulse Logo" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col text-left leading-tight">
+                    <span class="text-xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400 flex items-center font-sans">LedgerPulse</span>
+                    <span class="text-[9.5px] uppercase tracking-[0.16em] text-secondary-text font-semibold">CFO &amp; Advisory</span>
+                </div>
+            </a>
+
+            <!-- Desktop Quick Links -->
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-primary-text">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+
+            <!-- Right Icons -->
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" class="text-primary hover:text-accent p-1.5 rounded-full transition duration-200" aria-label="Toggle theme">
+                    <svg class="w-5 h-5 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <svg class="w-5 h-5 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+                <button id="lang-icon" class="text-primary hover:text-accent p-1.5 rounded-full transition duration-200" title="RTL/LTR">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                    </svg>
+                </button>
+                <a href="login.html" class="hidden sm:inline-flex btn-accent px-4 py-1.5 rounded-lg text-sm font-medium items-center gap-2">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN: 404 content -->
+    <main class="relative pt-24 flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-14 sm:py-20 overflow-hidden">
+        <!-- Ambient glows -->
+        <div class="absolute top-10 left-1/4 w-72 h-72 rounded-full bg-accent/10 blur-3xl pulse-glow pointer-events-none"></div>
+        <div class="absolute bottom-10 right-1/4 w-80 h-80 rounded-full bg-secondary/10 blur-3xl pulse-glow pointer-events-none" style="animation-delay: 2s;"></div>
+
+        <div class="relative z-10 w-full max-w-3xl mx-auto text-center">
+
+            <!-- Icon floating above 404 -->
+            <div class="float-slow inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-card-bg border border-border shadow-lg mb-6">
+                <i class="fa-solid fa-compass-drafting text-accent text-2xl"></i>
+            </div>
+
+            <!-- Big 404 -->
+            <h1 class="big-404 gradient-text select-none">404</h1>
+
+            <!-- Headline -->
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-primary-text mb-3 -mt-2 sm:-mt-4">
+                This page didn't reconcile
+            </h2>
+
+            <!-- Subtext -->
+            <p class="text-sm sm:text-base text-secondary-text leading-relaxed max-w-md mx-auto mb-8">
+                The page you're looking for may have been moved, renamed, or never existed in the first place. Let's get you back to something useful.
+            </p>
+
+            <!-- Primary CTAs -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
+                <a href="index.html" class="btn-primary w-full sm:w-auto px-6 py-3 rounded-lg text-sm font-semibold text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-house text-xs"></i> Back to Home
+                </a>
+                <a href="contact.html" class="btn-accent w-full sm:w-auto px-6 py-3 rounded-lg text-sm font-semibold text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-headset text-xs"></i> Contact Support
+                </a>
+            </div>
+
+            <!-- Quick links card -->
+            <div class="bg-card-bg rounded-2xl p-6 sm:p-7 border border-border shadow-sm max-w-xl mx-auto">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-secondary-text mb-4">Popular pages</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <a href="services.html" class="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-hover transition-colors group">
+                        <div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                            <i class="fa-solid fa-book text-accent text-sm"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-primary-text">Services</span>
+                    </a>
+                    <a href="pricing.html" class="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-hover transition-colors group">
+                        <div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                            <i class="fa-solid fa-tag text-accent text-sm"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-primary-text">Pricing</span>
+                    </a>
+                    <a href="case-studies.html" class="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-hover transition-colors group">
+                        <div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                            <i class="fa-solid fa-chart-line text-accent text-sm"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-primary-text">Case Studies</span>
+                    </a>
+                    <a href="about.html" class="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-hover transition-colors group">
+                        <div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                            <i class="fa-solid fa-users text-accent text-sm"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-primary-text">About</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Small trust note -->
+            <p class="text-[11px] text-secondary-text mt-8">
+                Error code: <span class="font-mono font-semibold text-accent">HTTP 404</span> · Need help? <a href="contact.html" class="text-accent font-semibold hover:underline">Reach out to our team</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- SIMPLE FOOTER -->
+    <footer class="py-6 border-t border-border bg-card-bg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-secondary-text">
+                <p>&copy; 2026 LedgerPulse Bookkeeping &amp; Fractional CFO Services. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="hover:text-accent transition-colors">Home</a>
+                    <a href="contact.html" class="hover:text-accent transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const html = document.documentElement;
+
+            // Theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const applyTheme = (theme) => {
+                html.setAttribute('data-theme', theme);
+                document.querySelectorAll('.light-icon').forEach(i => i.classList.toggle('hidden', theme === 'dark'));
+                document.querySelectorAll('.dark-icon').forEach(i => i.classList.toggle('hidden', theme === 'light'));
+                localStorage.setItem('theme', theme);
+            };
+            const initTheme = () => {
+                const stored = localStorage.getItem('theme');
+                const pref = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                applyTheme(stored === 'dark' || (!stored && pref) ? 'dark' : 'light');
+            };
+            const toggleTheme = () => {
+                const cur = html.getAttribute('data-theme');
+                applyTheme(cur === 'light' ? 'dark' : 'light');
+            };
+            themeToggle?.addEventListener('click', toggleTheme);
+            initTheme();
+
+            // Language RTL/LTR
+            const langBtn = document.getElementById('lang-icon');
+            const toggleLang = () => {
+                const isRTL = html.getAttribute('dir') === 'rtl';
+                html.setAttribute('dir', isRTL ? 'ltr' : 'rtl');
+                localStorage.setItem('language', isRTL ? 'en' : 'ar');
+            };
+            langBtn?.addEventListener('click', toggleLang);
+            const savedDir = localStorage.getItem('language') === 'ar' ? 'rtl' : 'ltr';
+            html.setAttribute('dir', savedDir);
+        });
+    </script>
+</body>
+
+</html>
+

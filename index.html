@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Custom Brand Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="shortcut icon" type="image/png" href="assets/logo.png">
+    <title>LedgerPulse | Bookkeeping & Fractional CFO Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* =========================
+           THEME VARIABLES - NAVY & EMERALD (FINANCIAL & CFO)
+        ========================= */
+        :root,
+        html[data-theme='light'] {
+            --color-background: #F8FAFC;
+            --color-primary-text: #0F172A;
+            --color-secondary-text: #475569;
+            --color-primary: #0F172A; /* Deep Navy Slate */
+            --color-secondary: #0D9488; /* Teal */
+            --color-accent: #059669; /* Emerald Green */
+            --color-border: #E2E8F0;
+            --color-hover: #F1F5F9;
+            --color-footer-bg: #090F1E;
+            --color-footer-text: #FFFFFF;
+            --color-card-bg: #FFFFFF;
+        }
+
+        html[data-theme='dark'] {
+            --color-background: #080D1A; /* Dark Midnight Navy */
+            --color-primary-text: #FFFFFF;
+            --color-secondary-text: #94A3B8;
+            --color-primary: #38BDF8; /* Sky Blue */
+            --color-secondary: #14B8A6; /* Teal */
+            --color-accent: #10B981; /* Emerald */
+            --color-border: #1E293B;
+            --color-hover: #111B2E;
+            --color-footer-bg: #040810;
+            --color-footer-text: #FFFFFF;
+            --color-card-bg: #0F172A; /* Slate Card */
+        }
+
+        html,
+        body {
+            background: var(--color-background);
+            color: var(--color-primary-text);
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        
+        
+        .bg-primary {
+            background-color: var(--color-primary);
+        }
+        .bg-accent {
+            background-color: var(--color-accent);
+        }
+
+        .bg-card-bg {
+            background-color: var(--color-card-bg);
+        }
+        .bg-gradient-primary-accent {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+        }
+        
+        .bg-secondary {
+            background-color: var(--color-secondary);
+        }
+        .hover\:bg-primary:hover {
+            background-color: var(--color-primary);
+        }
+        .hover\:bg-accent:hover {
+            background-color: var(--color-accent);
+        }
+        .hover\:bg-secondary:hover {
+            background-color: var(--color-secondary);
+        }
+
+        .text-primary-text {
+            color: var(--color-primary-text);
+        }
+
+        .text-secondary-text {
+            color: var(--color-secondary-text);
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        .text-primary {
+            color: var(--color-primary);
+        }
+
+        .text-secondary {
+            color: var(--color-secondary);
+        }
+
+        .bg-background {
+            background-color: var(--color-background);
+        }
+
+        .bg-hover {
+            background-color: var(--color-hover);
+        }
+
+        .border-border {
+            border-color: var(--color-border);
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+        #main-header nav {
+            background: var(--color-card-bg);
+            border-radius: 12px;
+            padding: 10px 25px;
+            margin: 0 auto;
+            max-width: 1350px;
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.1);
+        }
+
+        .header-accent {
+            color: var(--color-accent);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-link.active {
+            color: var(--color-accent);
+        }
+
+        /* Dropdowns */
+        .dropdown-wrapper {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 0.5rem;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+            min-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: 0.25s ease;
+        }
+
+        .dropdown-wrapper.open .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-wrapper.open svg {
+            transform: rotate(180deg);
+            transition: 0.25s;
+        }
+
+        .dropdown-menu a,
+        .dropdown-menu button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: var(--color-primary-text);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid var(--color-border);
+            width: 100%;
+            background: none;
+            cursor: pointer;
+        }
+
+        .dropdown-menu a:last-child,
+        .dropdown-menu button:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover,
+        .dropdown-menu button:hover {
+            background-color: var(--color-hover);
+            color: var(--color-accent);
+            padding-left: 1.25rem;
+        }
+
+        /* Subtle gap fix for Home & Restorations */
+        .home-link-gap {
+            margin-inline-end: 0.75rem;
+        }
+
+        @media (max-width: 1280px) {
+            .dropdown-menu {
+                position: absolute;
+                top: calc(100% + 8px);
+                left: 0;
+                display: none;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .dropdown-wrapper.open .dropdown-menu {
+                display: block;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
+
+        /* GLOW & CARDS */
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(192, 57, 43, 0.1);
+        }
+
+        .glow-on-hover:hover {
+            box-shadow: 0 0 25px rgba(192, 57, 43, 0.3);
+        }
+
+        /* Marquee */
+        .testimonial-marquee {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 30s linear infinite;
+        }
+
+        .testimonial-card {
+            flex: 0 0 auto;
+            margin-right: 24px;
+            background: var(--color-card-bg);
+            border-radius: 1rem;
+            width: 320px;
+        }
+
+        @keyframes marqueeScroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .testimonial-marquee:hover .marquee-track {
+            animation-play-state: paused;
+        }
+
+        /* Circles */
+        .circle-card {
+            width: 180px;
+            height: 180px;
+            background: var(--color-card-bg);
+            border-radius: 50%;
+            border: 3px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .4s ease;
+            margin: auto;
+        }
+
+        .circle-card:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(192, 57, 43, 0.4);
+            border-color: var(--color-accent);
+        }
+
+        .circle-inner h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--color-accent);
+        }
+
+        /* Project overlay */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            transition: all 0.4s ease;
+            background: var(--color-card-bg);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(156, 44, 29, 0.9), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: scale(1.03);
+        }
+
+        /* Articles */
+        .article-card {
+            transition: all 0.3s ease;
+            background: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(156, 44, 29, 0.12);
+        }
+
+        .article-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .article-card:hover .article-image {
+            transform: scale(1.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding-bottom: 0.1em;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-background) !important;
+            border: 2px solid var(--color-primary);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-secondary);
+            border-color: var(--color-secondary);
+            color: var(--color-background) !important;
+            box-shadow: 0 10px 20px -5px rgba(176, 141, 87, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: transparent;
+            color: var(--color-accent) !important;
+            border: 2px solid var(--color-accent);
+            transition: all 0.3s ease;
+        }
+
+        .btn-accent:hover {
+            background-color: var(--color-accent);
+            color: var(--color-background) !important;
+            border-color: var(--color-accent);
+            box-shadow: 0 10px 20px -5px rgba(176, 141, 87, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .particle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: floatParticle 12s infinite ease-in-out;
+        }
+
+        @keyframes floatParticle {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
+        }
+
+        .footer-link {
+            color: #ffffff;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--color-accent);
+        }
+
+        @media (max-width: 768px) {
+            .circle-card {
+                width: 140px;
+                height: 140px;
+            }
+
+            .circle-inner h3 {
+                font-size: 2rem;
+            }
+
+            .circle-cards-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 20px !important;
+            }
+
+            .project-overlay {
+                opacity: 1 !important;
+                background: linear-gradient(to top, rgba(156, 44, 29, 0.85), rgba(156, 44, 29, 0.4), transparent);
+            }
+        }
+
+        @media (max-width: 1280px) {
+            .circle-cards-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 24px !important;
+                justify-items: center;
+            }
+        }
+    
+        /* RTL Dropdown alignment override */
+        html[dir="rtl"] .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <header class="fixed top-3 left-0 w-full z-50 px-4 sm:px-6" id="main-header">
+        <nav class="mx-auto max-w-[1350px] px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between h-14 rounded-xl shadow-xl border border-border bg-card-bg"
+            style="background-color: var(--color-card-bg);">
+            <a href="index.html" class="flex items-center gap-3 shrink-0 group py-1">
+                <!-- Exact Brand Logo Icon -->
+                <div class="relative w-10 h-10 rounded-xl bg-white p-1 shadow-md shadow-emerald-900/10 border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                    <img src="assets/logo.png" alt="LedgerPulse Logo" class="w-full h-full object-contain">
+                </div>
+                <!-- Brand Typography -->
+                <div class="flex flex-col text-left leading-tight">
+                    <span class="text-xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400 flex items-center font-sans">
+                        LedgerPulse
+                    </span>
+                    <span class="text-[9.5px] uppercase tracking-[0.16em] text-secondary-text font-semibold">
+                        CFO & Advisory
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation (Centered) -->
+            <div class="hidden xl:flex items-center justify-center flex-1 px-8">
+                <div class="flex space-x-6 rtl:space-x-reverse text-primary-text font-medium">
+                    <div class="dropdown-wrapper home-link-gap">
+                        <button class="nav-link flex items-center dropdown-toggle">Home <svg
+                                class="w-3 h-3 ml-1.5 transition-transform" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg></button>
+                        <div class="dropdown-menu">
+                            <a href="index.html">Home 1</a>
+                            <a href="home2.html">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="services.html" class="nav-link">Services</a>
+                    <a href="pricing.html" class="nav-link">Pricing</a>
+                    <a href="case-studies.html" class="nav-link">Case Studies</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <div class="dropdown-wrapper">
+                        <button class="nav-link flex items-center dropdown-toggle">Dashboard <svg class="w-3 h-3 ml-1.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                        <div class="dropdown-menu">
+                            <a href="admin-dashboard.html">Admin Dashboard</a>
+                            <a href="user-dashboard.html">User Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Actions (Icons) -->
+            <div class="hidden xl:flex items-center space-x-3 rtl:space-x-reverse shrink-0">
+                <!-- Login Link -->
+                <div class="flex items-center space-x-3 rtl:space-x-reverse mr-2">
+                    <a href="login.html" class="btn-accent px-4 py-1.5 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </a>
+                </div>
+
+                <button id="theme-toggle"
+                    class="icon-btn text-primary hover:text-accent p-1.5 rounded-full transition duration-200">
+                    <svg class="w-5 h-5 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
+                    </svg>
+                    <svg class="w-5 h-5 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
+                    </svg>
+                </button>
+                <button id="lang-icon" class="text-primary hover:text-accent p-1.5 rounded-full transition duration-200"
+                    title="RTL/LTR">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center xl:hidden">
+                <button id="mobile-menu-open" class="icon-btn text-primary hover:text-accent p-1.5 rounded-full">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu-drawer" class="fixed inset-0 z-50 pointer-events-none transition-all duration-300">
+        <div id="drawer-backdrop"
+            class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+        <div id="drawer-content"
+            class="absolute top-0 left-0 right-0 bg-background rounded-b-2xl shadow-2xl p-6 xl:hidden max-h-[80vh] overflow-y-auto transform translate-y-[-100%] transition-transform duration-300 ease-out">
+            <div class="flex justify-between items-center pb-4 border-b border-border">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-xl bg-white p-1 shadow-sm border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden">
+                        <img src="assets/logo.png" alt="LedgerPulse Logo" class="w-full h-full object-contain">
+                    </div>
+                    <div class="flex flex-col text-left leading-tight">
+                        <span class="text-lg font-bold tracking-tight text-emerald-600 dark:text-emerald-400 font-sans">
+                            LedgerPulse
+                        </span>
+                        <span class="text-[9px] uppercase tracking-wider text-secondary-text font-semibold">
+                            CFO & Advisory
+                        </span>
+                    </div>
+                </a>
+                <button id="mobile-menu-close" class="text-primary hover:text-accent p-1.5 rounded-full"><svg
+                        class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg></button>
+            </div>
+            <nav class="flex flex-col space-y-2 py-4">
+                <div>
+                    <button
+                        class="block text-primary-text font-semibold text-lg hover:text-accent py-2 w-full text-left flex justify-between items-center"
+                        id="mobile-homes-toggle">Home <svg class="w-4 h-4 transform transition-transform"
+                            id="homes-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg></button>
+                    <div id="mobile-homes-menu"
+                        class="hidden pl-4 flex flex-col space-y-1 mt-1 border-l-2 border-border">
+                        <a href="index.html" class="text-secondary hover:text-accent py-1 px-2">Home 1</a>
+                        <a href="home2.html" class="text-secondary hover:text-accent py-1 px-2">Home 2</a>
+                    </div>
+                </div>
+                <a href="services.html" class="text-primary-text font-semibold text-lg hover:text-accent py-2">Services</a>
+                <a href="pricing.html" class="text-primary-text font-semibold text-lg hover:text-accent py-2">Pricing</a>
+                <a href="case-studies.html" class="text-primary-text font-semibold text-lg hover:text-accent py-2">Case Studies</a>
+                <a href="about.html" class="text-primary-text font-semibold text-lg hover:text-accent py-2">About</a>
+                <a href="contact.html" class="text-primary-text font-semibold text-lg hover:text-accent py-2">Contact</a>
+                <div>
+                    <button class="block text-primary-text font-semibold text-lg hover:text-accent py-2 w-full text-left flex justify-between items-center" id="mobile-dashboard-toggle">Dashboard <svg class="w-4 h-4 transform transition-transform" id="dashboard-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                    <div id="mobile-dashboard-menu" class="hidden pl-4 flex flex-col space-y-1 mt-1 border-l-2 border-border">
+                        <a href="admin-dashboard.html" class="text-secondary hover:text-accent py-1 px-2">Admin Dashboard</a>
+                        <a href="user-dashboard.html" class="text-secondary hover:text-accent py-1 px-2">User Dashboard</a>
+                    </div>
+                </div>
+                <!-- Login inside mobile header -->
+                <div class="pt-3 mt-2 border-t border-border flex gap-3">
+                    <a href="login.html"
+                        class="flex-1 py-2.5 rounded-lg border border-accent text-accent hover:bg-accent hover:text-white transition font-medium flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </a>
+                </div>
+            </nav>
+            <div class="bottom-icons pt-4 border-t border-border mt-4 flex justify-center items-center gap-8">
+
+                <!-- Theme Toggle (same style as navbar) -->
+                <button id="mobile-theme-toggle"
+                    class="icon-btn text-primary hover:text-accent p-1.5 rounded-full transition duration-200">
+                    <svg class="w-6 h-6 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
+                    </svg>
+                    <svg class="w-6 h-6 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
+                    </svg>
+                </button>
+
+                <!-- RTL -->
+                <button id="mobile-lang-icon"
+                    class="icon-btn text-primary hover:text-accent p-1.5 rounded-full transition duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+<main class="relative">
+
+    <!-- SECTION 1: HERO — Full View Hero with Professional Financial Visual & Interactive Live Metric Highlights -->
+    <section class="relative min-h-[92vh] lg:min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-16">
+        <!-- Full-bleed Background Image with Premium Multi-stop Dark Gradient Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="assets/a1.jpg" 
+                 alt="Modern Financial High-Rise Skyline" 
+                 class="w-full h-full object-cover object-center scale-105 transform animate-pulse duration-[10000ms]">
+            <!-- Gradient Overlay that guarantees high contrast in both light and dark themes -->
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-900/85 to-slate-950/70"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40"></div>
+            <!-- Ambient Radial Glow Accent -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-1/3 right-1/4 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12 lg:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                
+                <!-- Left Hero Content (7 Cols) -->
+                <div class="lg:col-span-7 text-left space-y-6">
+                    <!-- Trust Pill -->
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-medium backdrop-blur-md">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span>Trusted by 140+ Venture & Scaling Businesses</span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.12] tracking-tight">
+                        Financial Clarity.<br>
+                        <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-sky-400 bg-clip-text text-transparent">
+                            Executive CFO Precision.
+                        </span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl font-normal">
+                        Eliminate bookkeeping chaos, master your runway with real-time cash flow forecasting, and gain seasoned Fractional CFO advisory without the six-figure executive salary.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                        <a href="contact.html" class="inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-7 py-3.5 rounded-xl shadow-lg shadow-emerald-600/30 hover:shadow-emerald-500/40 transition-all duration-300 text-sm sm:text-base">
+                            <span>Schedule CFO Consultation</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="pricing.html" class="inline-flex items-center justify-center gap-2 border border-slate-600 hover:border-slate-400 bg-slate-900/60 hover:bg-slate-800/80 text-white font-medium px-6 py-3.5 rounded-xl backdrop-blur-md transition-all duration-300 text-sm sm:text-base">
+                            <i class="fa-solid fa-chart-pie text-emerald-400"></i>
+                            <span>Explore Plans</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Metrics Strip -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-800 max-w-xl text-center sm:text-left">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">99.8%</div>
+                            <div class="text-[11px] sm:text-xs text-slate-300 uppercase tracking-wider mt-0.5">Reconciliation Accuracy</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400">13-Wk</div>
+                            <div class="text-[11px] sm:text-xs text-slate-300 uppercase tracking-wider mt-0.5">Rolling Cash Forecast</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-sky-400">Day 5</div>
+                            <div class="text-[11px] sm:text-xs text-slate-300 uppercase tracking-wider mt-0.5">Monthly Close Guaranteed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Hero Floating Glass Card: Real-Time CFO Live Dashboard Preview (5 Cols) -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative bg-slate-900/80 backdrop-blur-xl border border-slate-700/60 rounded-2xl p-6 sm:p-7 shadow-2xl shadow-black/60 space-y-5">
+                        
+                        <!-- Card Header -->
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+                                    <i class="fa-solid fa-chart-line text-emerald-400"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white">Cash Flow Trajectory</h3>
+                                    <p class="text-[11px] text-slate-400">Current Q4 Financial Runway</p>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                Live Sync
+                            </span>
+                        </div>
+
+                        <!-- KPI Highlights -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800/80">
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Cash Balance</span>
+                                <span class="text-xl sm:text-2xl font-bold text-white mt-1 block">$482,900</span>
+                                <span class="text-[11px] text-emerald-400 font-medium flex items-center gap-1 mt-1">
+                                    <i class="fa-solid fa-arrow-trend-up text-[10px]"></i> +18.4% vs last mo
+                                </span>
+                            </div>
+                            <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800/80">
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Runway Left</span>
+                                <span class="text-xl sm:text-2xl font-bold text-sky-400 mt-1 block">18.4 Mos</span>
+                                <span class="text-[11px] text-slate-400 font-medium flex items-center gap-1 mt-1">
+                                    <i class="fa-solid fa-shield-check text-emerald-400 text-[10px]"></i> Capital Secure
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Mock Graph Visual Bars -->
+                        <div class="space-y-2 pt-2">
+                            <div class="flex justify-between text-xs text-slate-300">
+                                <span>Operating Margin Target</span>
+                                <span class="font-semibold text-emerald-400">32.8% (Exceeded)</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex">
+                                <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style="width: 82%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Fractional CFO Note Banner -->
+                        <div class="p-3.5 rounded-xl bg-gradient-to-r from-emerald-950/40 to-slate-900 border border-emerald-500/30 flex items-start gap-3">
+                            <div class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-user-tie text-xs"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold text-white block">CFO Strategy Advisory Note</span>
+                                <p class="text-[11px] text-slate-300 leading-snug mt-0.5">
+                                    "Your burn rate dropped 12% following supplier renegotiation. Recommend deploying excess capital into Q1 growth."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: EXECUTIVE COMPARISON & FINANCIAL LIFECYCLE (Clean, Editorial, High-Trust) -->
+    <section class="py-20 lg:py-28 bg-card-bg relative border-b border-border overflow-hidden">
+        <!-- Subtle Grid Ambient Graphic -->
+        <div class="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <!-- Section Header: Clean Editorial Style -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16 pb-8 border-b border-border">
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400 mb-3">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        The Problem & The Standard
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary-text tracking-tight leading-tight">
+                        Why Traditional Accounting Fails Modern Businesses
+                    </h2>
+                </div>
+                <p class="max-w-md text-sm sm:text-base text-secondary-text leading-relaxed">
+                    Most companies settle for reactive tax filers who speak in backward-looking jargon. We build the forward-looking financial nervous system your business actually needs.
+                </p>
+            </div>
+
+            <!-- Two-Sided Executive Comparison: Traditional vs LedgerPulse -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-20">
+                
+                <!-- Side 1: The Outdated Approach -->
+                <div class="rounded-3xl p-8 sm:p-10 bg-slate-100/70 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300">Status Quo</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
+                                Reactive & Fragile
+                            </span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-primary-text mb-4">Typical Freelancer or Generic Firm</h3>
+                        <p class="text-sm text-secondary-text leading-relaxed mb-8">
+                            Books closed 45 days late, zero cash guidance, and sudden tax surprises that leave leadership guessing.
+                        </p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-6 h-6 rounded-full bg-rose-500/10 text-rose-500 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-xmark text-xs"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-primary-text">Backward-Looking Only</h4>
+                                    <p class="text-xs text-secondary-text mt-0.5">Reports what you spent 2 months ago, with no plan for tomorrow.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-6 h-6 rounded-full bg-rose-500/10 text-rose-500 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-xmark text-xs"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-primary-text">Hidden Runway Blindspots</h4>
+                                    <p class="text-xs text-secondary-text mt-0.5">No 13-week cash models; payroll dates trigger recurring anxiety.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-6 h-6 rounded-full bg-rose-500/10 text-rose-500 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-xmark text-xs"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-primary-text">No Commercial Advisory</h4>
+                                    <p class="text-xs text-secondary-text mt-0.5">Nobody to pressure-test pricing, unit economics, or hiring plans.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-5 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2.5">
+                        <span class="inline-block w-2 h-2 rounded-full bg-rose-500 shrink-0"></span>
+                        <p class="text-xs text-secondary-text font-medium leading-relaxed">
+                            <strong class="text-rose-600 dark:text-rose-400 font-semibold">Outcome:</strong> Stalled decisions, cash flow panic, and missed growth windows.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Side 2: The LedgerPulse Strategic Partnership -->
+                <div class="relative rounded-3xl p-8 sm:p-10 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white border-2 border-emerald-500/40 shadow-2xl shadow-emerald-950/30 flex flex-col justify-between">
+                    <!-- Glow badge -->
+                    <div class="absolute -top-3.5 right-8 bg-emerald-500 text-slate-950 text-[11px] font-extrabold uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
+                        Recommended Standard
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">The LedgerPulse Standard</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                Proactive & Strategic
+                            </span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Bookkeeping + Fractional CFO Combined</h3>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-8">
+                            A dedicated finance department that delivers clean numbers by Day 5 and co-pilots every strategic decision.
+                        </p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-check text-xs"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-white">Guaranteed Day 5 Close</h4>
+                                    <p class="text-xs text-slate-300 mt-0.5">Audit-grade financial statements delivered while the month is still fresh.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-check text-xs"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-white">Dynamic 13-Week Cash Forecast</h4>
+                                    <p class="text-xs text-slate-300 mt-0.5">Know exact bank balances months in advance with real-time scenario planning.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3.5">
+                                <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-check text-xs"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-white">Executive Board-Level Partner</h4>
+                                    <p class="text-xs text-slate-300 mt-0.5">Monthly strategic reviews, KPI benchmarks, and fundraising guidance.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-5 border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                        <div class="flex items-center gap-2.5">
+                            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse"></span>
+                            <p class="text-xs text-slate-200 font-medium leading-relaxed">
+                                <strong class="text-emerald-400 font-semibold">Outcome:</strong> Complete peace of mind &amp; accelerated valuation.
+                            </p>
+                        </div>
+                        <a href="pricing.html" class="inline-flex items-center gap-1.5 font-semibold text-xs text-emerald-400 hover:text-emerald-300 transition shrink-0 group self-start sm:self-auto">
+                            <span>Compare Plans</span>
+                            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Three Core Deliverable Pillars: Clean, Minimalist Strip with Enhanced Tab/Mobile Polish -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 pt-8 border-t border-border">
+                <!-- Pillar 01 -->
+                <div class="flex items-start gap-4 p-4 sm:p-5 rounded-2xl bg-card-bg/60 border border-border/80 shadow-sm md:border-0 md:bg-transparent md:p-0 md:shadow-none transition-all">
+                    <span class="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono shrink-0 leading-none">01</span>
+                    <div>
+                        <h4 class="text-sm sm:text-base font-bold text-primary-text mb-1">Meticulous Ledger Accuracy</h4>
+                        <p class="text-xs sm:text-sm text-secondary-text leading-relaxed">
+                            Every receipt, vendor invoice, and payroll run reconciled with zero categorization guesses.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pillar 02 -->
+                <div class="flex items-start gap-4 p-4 sm:p-5 rounded-2xl bg-card-bg/60 border border-border/80 shadow-sm md:border-0 md:bg-transparent md:p-0 md:shadow-none transition-all">
+                    <span class="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono shrink-0 leading-none">02</span>
+                    <div>
+                        <h4 class="text-sm sm:text-base font-bold text-primary-text mb-1">CFO Growth Advisory</h4>
+                        <p class="text-xs sm:text-sm text-secondary-text leading-relaxed">
+                            Budget vs actual variance analysis, customer acquisition economics, and profitability engineering.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pillar 03 -->
+                <div class="flex items-start gap-4 p-4 sm:p-5 rounded-2xl bg-card-bg/60 border border-border/80 shadow-sm md:border-0 md:bg-transparent md:p-0 md:shadow-none transition-all">
+                    <span class="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono shrink-0 leading-none">03</span>
+                    <div>
+                        <h4 class="text-sm sm:text-base font-bold text-primary-text mb-1">Audit &amp; Diligence Ready</h4>
+                        <p class="text-xs sm:text-sm text-secondary-text leading-relaxed">
+                            Structured data rooms ready on demand for investors, bank credit lines, and smooth tax handoffs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: CFO FEATURES — Overlapping card collage with image -->
+    <section class="py-14 sm:py-16 lg:py-20 bg-background">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-text mb-3">Beyond the ledger</h2>
+                <p class="text-sm sm:text-base text-secondary-text leading-relaxed">What fractional CFO advisory adds on top of clean books.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-5xl mx-auto items-stretch">
+                <div class="lg:col-span-5 rounded-2xl overflow-hidden border border-border shadow-md relative min-h-[260px]">
+                    <img src="assets/a2.jpg" alt="Financial charts and analysis on desk" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 class="text-lg font-bold text-white">Cash Flow Forecasting</h3>
+                        <p class="text-xs text-white/80 mt-1">Rolling 13-week projections built from your actual books.</p>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-card-bg rounded-xl p-5 border border-border shadow-sm flex flex-col">
+                        <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-chart-line text-accent"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-primary-text mb-1.5">Budget vs. Actual</h3>
+                        <p class="text-xs text-secondary-text leading-relaxed">Monthly variance reports that explain the why, not just the number.</p>
+                    </div>
+                    <div class="bg-card-bg rounded-xl p-5 border border-border shadow-sm flex flex-col">
+                        <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-comments-dollar text-accent"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-primary-text mb-1.5">Strategy Sessions</h3>
+                        <p class="text-xs text-secondary-text leading-relaxed">A monthly call to review performance and pressure-test decisions.</p>
+                    </div>
+                    <div class="bg-card-bg rounded-xl p-5 border border-border shadow-sm flex flex-col">
+                        <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-hand-holding-dollar text-accent"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-primary-text mb-1.5">Funding Prep</h3>
+                        <p class="text-xs text-secondary-text leading-relaxed">Investor-ready financials when you're raising or applying for credit.</p>
+                    </div>
+                    <div class="bg-card-bg rounded-xl p-5 border border-border shadow-sm flex flex-col">
+                        <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-calculator text-accent"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-primary-text mb-1.5">Tax Planning</h3>
+                        <p class="text-xs text-secondary-text leading-relaxed">Quarterly check-ins so there are no surprises at year-end.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: PROCESS — Horizontal numbered steps in dark panel -->
+    <section class="py-14 sm:py-16 lg:py-20 bg-primary relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-accent/10 blur-3xl"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">How onboarding works</h2>
+                <p class="text-sm sm:text-base text-white/90 leading-relaxed">From first call to clean books in about two weeks.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
+                <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                    <div class="text-4xl font-bold text-accent mb-3">1</div>
+                    <h3 class="text-base font-bold text-white mb-2">Book Audit</h3>
+                    <p class="text-xs text-white/65 leading-relaxed">We review your current books, flag errors, and map what needs fixing before anything else begins.</p>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                    <div class="text-4xl font-bold text-accent mb-3">2</div>
+                    <h3 class="text-base font-bold text-white mb-2">Cleanup</h3>
+                    <p class="text-xs text-white/65 leading-relaxed">Past months are reconciled and brought current so you start from a verified baseline.</p>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                    <div class="text-4xl font-bold text-accent mb-3">3</div>
+                    <h3 class="text-base font-bold text-white mb-2">Monthly Rhythm</h3>
+                    <p class="text-xs text-white/65 leading-relaxed">Recurring bookkeeping, reporting, and advisory calls begin on a predictable schedule.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: TRUST — Testimonial grid with client avatars -->
+    <section class="py-14 sm:py-16 lg:py-20 bg-hover border-y border-border">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-text mb-3">What clients say after the first quarter</h2>
+                <p class="text-sm sm:text-base text-secondary-text leading-relaxed">Real feedback from owners who switched to a monthly bookkeeping + CFO model.</p>
+            </div>
+            <div class="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 max-w-5xl mx-auto items-stretch">
+                <!-- Card 1 -->
+                <div class="bg-card-bg rounded-xl p-3 sm:p-4 md:p-5 border border-border shadow-sm flex flex-col justify-between h-full">
+                    <div>
+                        <div class="flex gap-0.5 sm:gap-1 mb-2.5">
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                        </div>
+                        <p class="text-[11px] sm:text-xs md:text-sm text-primary-text leading-relaxed mb-4">"I stopped dreading month-end. The reports are clean, the cash flow forecast changed how we plan hires."</p>
+                    </div>
+                    <div class="flex items-center gap-2 sm:gap-3 pt-2 border-t border-border/50">
+                        <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-border shrink-0">
+                            <img src="assets/a3.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div class="text-[10px] sm:text-xs min-w-0">
+                            <div class="font-bold text-primary-text truncate">Operations Director</div>
+                            <div class="text-secondary-text truncate">Digital Agency</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-card-bg rounded-xl p-3 sm:p-4 md:p-5 border border-border shadow-sm flex flex-col justify-between h-full">
+                    <div>
+                        <div class="flex gap-0.5 sm:gap-1 mb-2.5">
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                        </div>
+                        <p class="text-[11px] sm:text-xs md:text-sm text-primary-text leading-relaxed mb-4">"The budget variance reports are the first financial documents I actually read. Clear, brief, and actionable."</p>
+                    </div>
+                    <div class="flex items-center gap-2 sm:gap-3 pt-2 border-t border-border/50">
+                        <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-border shrink-0">
+                            <img src="assets/a4.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div class="text-[10px] sm:text-xs min-w-0">
+                            <div class="font-bold text-primary-text truncate">Founder</div>
+                            <div class="text-secondary-text truncate">E-commerce Brand</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-card-bg rounded-xl p-3 sm:p-4 md:p-5 border border-border shadow-sm flex flex-col justify-between h-full">
+                    <div>
+                        <div class="flex gap-0.5 sm:gap-1 mb-2.5">
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                        </div>
+                        <p class="text-[11px] sm:text-xs md:text-sm text-primary-text leading-relaxed mb-4">"Having a CFO on call without the salary is exactly what a growing practice needs. Responsive and practical."</p>
+                    </div>
+                    <div class="flex items-center gap-2 sm:gap-3 pt-2 border-t border-border/50">
+                        <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-border shrink-0">
+                            <img src="assets/e4.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div class="text-[10px] sm:text-xs min-w-0">
+                            <div class="font-bold text-primary-text truncate">Managing Partner</div>
+                            <div class="text-secondary-text truncate">Professional Practice</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: FINAL CTA — Centered banner with horizontal form row -->
+    <section class="py-14 sm:py-16 lg:py-20 bg-background">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto bg-gradient-primary-accent rounded-2xl p-8 sm:p-10 lg:p-12 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+                <div class="relative z-10 text-center">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3">Get your free book review</h2>
+                    <p class="text-sm text-white/75 leading-relaxed mb-6 max-w-md mx-auto">We'll audit one month of your books and send back a short report — no cost, no commitment.</p>
+                    <form class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+                        <input type="email" placeholder="Your business email" class="flex-1 px-4 py-3 rounded-lg bg-white/95 text-sm text-slate-800 placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-white/50">
+                        <button type="button" class="bg-white text-emerald-700 hover:bg-emerald-50 font-semibold px-6 py-3 rounded-lg text-sm transition-colors whitespace-nowrap">Send My Review</button>
+                    </form>
+                    <p class="text-[11px] text-white/85 mt-4">Remote-first · US &amp; Canada · QuickBooks &amp; Xero certified</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+    <!-- Footer Vintage Style -->
+    <footer id="main-footer" class="pt-14 transition-colors duration-300"
+        style="background-color: var(--color-footer-bg);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8 pb-10 border-b border-slate-700">
+                <div class="col-span-2 md:col-span-2">
+                    <a href="index.html" class="flex items-center gap-3 mb-4 group inline-flex">
+                        <div class="w-11 h-11 rounded-xl bg-white p-1 shadow-md border border-slate-700 flex items-center justify-center overflow-hidden">
+                            <img src="assets/logo.png" alt="LedgerPulse Logo" class="w-full h-full object-contain">
+                        </div>
+                        <div class="flex flex-col text-left leading-tight">
+                            <span class="text-xl font-bold tracking-tight text-emerald-400 font-sans">
+                                LedgerPulse
+                            </span>
+                            <span class="text-[9.5px] uppercase tracking-[0.16em] text-slate-300 font-semibold">
+                                CFO & Advisory
+                            </span>
+                        </div>
+                    </a>
+                    <p class="text-sm leading-relaxed max-w-xs text-slate-300">Empowering growing businesses and startups with clear bookkeeping, forecasting, and fractional CFO advisory for confident financial decisions.</p>
+                    <div class="flex space-x-4 rtl:space-x-reverse mt-6">
+                        <a href="#" class="text-slate-300 hover:text-accent transition"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-slate-300 hover:text-accent transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-slate-300 hover:text-accent transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-4 text-accent">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="footer-link">Full-Charge Bookkeeping</a></li>
+                        <li><a href="services.html" class="footer-link">Fractional CFO Advisory</a></li>
+                        <li><a href="services.html" class="footer-link">Cash Flow Forecasting</a></li>
+                        <li><a href="services.html" class="footer-link">Tax Readiness & Reporting</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-4 text-accent">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="services.html" class="footer-link">Services</a></li>
+                        <li><a href="pricing.html" class="footer-link">Pricing Plans</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-2 lg:col-span-1">
+                    <h4 class="font-medium text-lg mb-4 text-accent">Financial Insights</h4>
+                    <p class="max-w-3xl text-sm mb-4 text-slate-300">Get monthly CFO briefings, tax alerts, and cash flow playbooks.</p>
+                    <input type="email" placeholder="Your business email"
+                        class="p-3 text-sm rounded-lg w-full bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-accent text-white outline-none">
+                    <button class="btn-accent font-semibold py-3 rounded-lg w-full mt-3">Subscribe</button>
+                </div>
+            </div>
+            <div class="py-4 text-center text-xs text-slate-300">&copy; 2026 LedgerPulse Bookkeeping & Fractional CFO Services. All rights reserved. | <span class="hover:text-accent cursor-pointer">Privacy Policy</span> | <span class="hover:text-accent cursor-pointer">Terms of Service</span></div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const html = document.documentElement;
+            
+            // Active Nav Links (Dynamic)
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            
+            // Desktop Links
+            document.querySelectorAll('.nav-link, .dropdown-menu a').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href !== '#' && href === currentPath) {
+                    link.classList.add('active');
+                    link.style.color = 'var(--color-accent)';
+                    const parentBtn = link.closest('.dropdown-wrapper')?.querySelector('.dropdown-toggle');
+                    if (parentBtn) {
+                        parentBtn.classList.add('active');
+                        parentBtn.style.color = 'var(--color-accent)';
+                    }
+                }
+            });
+
+            // Mobile Links
+            document.querySelectorAll('#drawer-content a, #drawer-content button.block').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href !== '#' && href === currentPath) {
+                    if (link.classList.contains('py-1')) {
+                        link.classList.remove('text-secondary');
+                        link.classList.add('text-accent');
+                        const parentBtn = link.closest('div')?.previousElementSibling;
+                        if (parentBtn && parentBtn.tagName === 'BUTTON') {
+                            parentBtn.classList.remove('text-primary-text');
+                            parentBtn.classList.add('text-accent');
+                        }
+                    } else {
+                        link.classList.remove('text-primary-text');
+                        link.classList.add('text-accent');
+                    }
+                }
+            });
+
+            // Dropdown toggles
+            document.querySelectorAll(".dropdown-wrapper").forEach(dropdown => {
+                const btn = dropdown.querySelector(".dropdown-toggle");
+                dropdown.addEventListener("mouseenter", () => { if (window.innerWidth > 1280) dropdown.classList.add("open"); });
+                dropdown.addEventListener("mouseleave", () => { if (window.innerWidth > 1280) dropdown.classList.remove("open"); });
+                if (btn && window.innerWidth <= 1280) btn.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); dropdown.classList.toggle("open"); });
+            });
+            document.addEventListener("click", e => { document.querySelectorAll(".dropdown-wrapper").forEach(d => { if (!d.contains(e.target)) d.classList.remove("open"); }); });
+
+            // Theme
+            const themeToggle = document.getElementById('theme-toggle'), mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            const applyTheme = (theme) => { html.setAttribute('data-theme', theme); document.querySelectorAll('.light-icon').forEach(i => i.classList.toggle('hidden', theme === 'dark')); document.querySelectorAll('.dark-icon').forEach(i => i.classList.toggle('hidden', theme === 'light')); localStorage.setItem('theme', theme); };
+            const initTheme = () => { const stored = localStorage.getItem('theme'); const pref = window.matchMedia('(prefers-color-scheme: dark)').matches; applyTheme(stored === 'dark' || (!stored && pref) ? 'dark' : 'light'); };
+            const toggleTheme = () => { const cur = html.getAttribute('data-theme'); applyTheme(cur === 'light' ? 'dark' : 'light'); };
+            themeToggle?.addEventListener('click', toggleTheme); mobileThemeToggle?.addEventListener('click', toggleTheme); initTheme();
+
+            // Language RTL
+            const langBtn = document.getElementById('lang-icon'), mobileLang = document.getElementById('mobile-lang-icon');
+            const toggleLang = () => { const isRTL = html.getAttribute('dir') === 'rtl'; html.setAttribute('dir', isRTL ? 'ltr' : 'rtl'); localStorage.setItem('language', isRTL ? 'en' : 'ar'); };
+            if (langBtn) langBtn.addEventListener('click', toggleLang);
+            if (mobileLang) mobileLang.addEventListener('click', toggleLang);
+            const savedDir = localStorage.getItem('language') === 'ar' ? 'rtl' : 'ltr'; html.setAttribute('dir', savedDir);
+
+            // Mobile drawer
+            const drawer = document.getElementById('mobile-menu-drawer'), backdrop = document.getElementById('drawer-backdrop'), content = document.getElementById('drawer-content'), openBtn = document.getElementById('mobile-menu-open'), closeBtn = document.getElementById('mobile-menu-close');
+            const openDrawer = () => { drawer.classList.remove('pointer-events-none'); content.classList.remove('translate-y-[-100%]'); backdrop.classList.add('opacity-50', 'pointer-events-auto'); document.body.style.overflow = 'hidden'; };
+            const closeDrawer = () => { content.classList.add('translate-y-[-100%]'); backdrop.classList.remove('opacity-50', 'pointer-events-auto'); content.addEventListener('transitionend', () => { drawer.classList.add('pointer-events-none'); document.body.style.overflow = ''; }, { once: true }); };
+            openBtn?.addEventListener('click', openDrawer); closeBtn?.addEventListener('click', closeDrawer); backdrop?.addEventListener('click', closeDrawer);
+            document.getElementById('mobile-homes-toggle')?.addEventListener('click', () => { document.getElementById('mobile-homes-menu')?.classList.toggle('hidden'); document.getElementById('homes-icon')?.classList.toggle('rotate-180'); });
+            document.getElementById('mobile-dashboard-toggle')?.addEventListener('click', () => { document.getElementById('mobile-dashboard-menu')?.classList.toggle('hidden'); document.getElementById('dashboard-icon')?.classList.toggle('rotate-180'); });
+
+            // Particles
+            const particlesDiv = document.getElementById('particles'); if (particlesDiv) for (let i = 0; i < 35; i++) { let p = document.createElement('div'); p.classList.add('particle'); let size = Math.random() * 6 + 2; p.style.width = size + 'px'; p.style.height = size + 'px'; p.style.left = Math.random() * 100 + '%'; p.style.top = Math.random() * 100 + '%'; p.style.animationDelay = Math.random() * 5 + 's'; p.style.animationDuration = Math.random() * 12 + 8 + 's'; particlesDiv.appendChild(p); }
+            // Scroll reveal
+            const reveals = document.querySelectorAll('.reveal'); const revealScroll = () => { reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active'); }); }; window.addEventListener('scroll', revealScroll); revealScroll();
+            // Marquee duplication
+            const track = document.querySelector('.marquee-track'); if (track) track.innerHTML += track.innerHTML;
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
