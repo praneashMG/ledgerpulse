@@ -11,6 +11,13 @@
     <title>LedgerPulse | Bookkeeping & Fractional CFO Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind.js"></script>
+    <script>
+        tailwind = window.tailwind || {};
+        tailwind.config = {
+            darkMode: ['selector', '[data-theme="dark"]'],
+        };
+    </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* =========================
@@ -35,7 +42,7 @@
             --color-background: #080D1A; /* Dark Midnight Navy */
             --color-primary-text: #FFFFFF;
             --color-secondary-text: #94A3B8;
-            --color-primary: #38BDF8; /* Sky Blue */
+            --color-primary: #0F172A; /* Deep Slate Navy */
             --color-secondary: #14B8A6; /* Teal */
             --color-accent: #10B981; /* Emerald */
             --color-border: #1E293B;
@@ -98,7 +105,7 @@
         }
 
         .text-primary {
-            color: var(--color-primary);
+            color: var(--color-primary-text);
         }
 
         .text-secondary {
@@ -375,17 +382,17 @@
         }
 
         .btn-primary {
-            background-color: var(--color-primary);
-            color: var(--color-background) !important;
-            border: 2px solid var(--color-primary);
+            background-color: var(--color-accent);
+            color: #FFFFFF !important;
+            border: 2px solid var(--color-accent);
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             background-color: var(--color-secondary);
             border-color: var(--color-secondary);
-            color: var(--color-background) !important;
-            box-shadow: 0 10px 20px -5px rgba(176, 141, 87, 0.4);
+            color: #FFFFFF !important;
+            box-shadow: 0 10px 20px -5px rgba(5, 150, 105, 0.4);
             transform: translateY(-2px);
         }
 
@@ -1125,7 +1132,7 @@
 
             // Theme
             const themeToggle = document.getElementById('theme-toggle'), mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-            const applyTheme = (theme) => { html.setAttribute('data-theme', theme); document.querySelectorAll('.light-icon').forEach(i => i.classList.toggle('hidden', theme === 'dark')); document.querySelectorAll('.dark-icon').forEach(i => i.classList.toggle('hidden', theme === 'light')); localStorage.setItem('theme', theme); };
+            const applyTheme = (theme) => { html.setAttribute('data-theme', theme); html.classList.toggle('dark', theme === 'dark'); document.querySelectorAll('.light-icon').forEach(i => i.classList.toggle('hidden', theme === 'dark')); document.querySelectorAll('.dark-icon').forEach(i => i.classList.toggle('hidden', theme === 'light')); localStorage.setItem('theme', theme); };
             const initTheme = () => { const stored = localStorage.getItem('theme'); const pref = window.matchMedia('(prefers-color-scheme: dark)').matches; applyTheme(stored === 'dark' || (!stored && pref) ? 'dark' : 'light'); };
             const toggleTheme = () => { const cur = html.getAttribute('data-theme'); applyTheme(cur === 'light' ? 'dark' : 'light'); };
             themeToggle?.addEventListener('click', toggleTheme); mobileThemeToggle?.addEventListener('click', toggleTheme); initTheme();

@@ -11,7 +11,7 @@
 
     <script>
         tailwind.config = {
-            darkMode: 'class',
+            darkMode: ['selector', '[data-theme="dark"]'],
             theme: {
                 extend: {
                     colors: {
@@ -485,7 +485,7 @@
             const html = document.documentElement;
             const current = html.getAttribute('data-theme');
             const target = current === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', target);
+            html.setAttribute('data-theme', target); html.classList.toggle('dark', target === 'dark');
             localStorage.setItem('theme', target);
             
             const lightIcons = document.querySelectorAll('.light-icon');
@@ -512,7 +512,7 @@
         (function init() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             const html = document.documentElement;
-            html.setAttribute('data-theme', savedTheme);
+            html.setAttribute('data-theme', savedTheme); html.classList.toggle('dark', savedTheme === 'dark');
             
             const lightIcons = document.querySelectorAll('.light-icon');
             const darkIcons = document.querySelectorAll('.dark-icon');

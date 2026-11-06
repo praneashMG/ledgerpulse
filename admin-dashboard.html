@@ -7,6 +7,13 @@
   <title>LedgerPulse · Admin Control Center</title>
   <!-- Tailwind + Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind = window.tailwind || {};
+        tailwind.config = {
+            darkMode: ['selector', '[data-theme="dark"]'],
+        };
+    </script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
@@ -31,7 +38,7 @@
       --color-background: #080D1A;
       --color-primary-text: #FFFFFF;
       --color-secondary-text: #94A3B8;
-      --color-primary: #38BDF8;
+      --color-primary: #0F172A; /* Deep Slate Navy */
       --color-secondary: #14B8A6;
       --color-accent: #10B981;
       --color-border: #1E293B;
@@ -540,7 +547,7 @@
       // ----- 2. THEME -----
       const themeBtn = document.getElementById('theme-toggle-user');
       function setTheme(theme) {
-        htmlEl.setAttribute('data-theme', theme);
+        htmlEl.setAttribute('data-theme', theme); htmlEl.classList.toggle('dark', theme === 'dark');
         localStorage.setItem('LedgerPulse_theme', theme);
         if (themeBtn) themeBtn.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
       }
@@ -575,4 +582,4 @@
     })();
   </script>
 </body>
-</html>
+</html>  
