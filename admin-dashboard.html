@@ -150,6 +150,11 @@
       transition: width 0.3s ease;
     }
     .status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      flex-shrink: 0;
       padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem;
       font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
     }
@@ -292,15 +297,15 @@
 
         <!-- OVERVIEW / DASHBOARD -->
         <div id="overview" class="admin-section">
-          <div class="dashboard-card p-5 sm:p-7 reveal active mb-6 bg-accent-gradient text-white">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div class="dashboard-card p-4 sm:p-7 reveal active mb-6 bg-accent-gradient text-white">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
-                <h2 class="text-2xl sm:text-3xl font-semibold mb-2">📊 Practice Overview, Michael</h2>
-                <p class="text-white/80 text-sm">Real-time client health, bookkeeping pipeline, and advisory load.</p>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-1 sm:mb-2">📊 Practice Overview, Michael</h2>
+                <p class="text-white/80 text-xs sm:text-sm">Real-time client health, bookkeeping pipeline, and advisory load.</p>
               </div>
-              <div class="flex gap-3">
-                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider">Today · Apr 09, 2026</span>
-                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center gap-1"><i class="fas fa-circle text-success text-[6px]"></i> All Systems Go</span>
+              <div class="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider whitespace-nowrap">Today · Apr 09, 2026</span>
+                <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap"><i class="fas fa-circle text-emerald-300 text-[6px]"></i> All Systems Go</span>
               </div>
             </div>
           </div>
@@ -339,18 +344,20 @@
 
           <!-- Workflow chart + quick action -->
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="dashboard-card p-6 lg:col-span-2 reveal">
-              <div class="flex justify-between items-center mb-6"><h3 class="font-semibold text-lg">Bookkeeping Pipeline · April Close</h3><select class="bg-hover border border-border rounded-full px-4 py-2 text-xs font-medium uppercase"><option>All clients</option><option>Bookkeeping only</option><option>CFO+books</option></select></div>
-              <div class="h-64 flex items-end justify-between gap-2">
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 40px; width: 60%;"></div><span class="text-xs text-secondary-text">Collected</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 65px; width: 80%;"></div><span class="text-xs text-secondary-text">Categorized</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 90px; width: 95%;"></div><span class="text-xs text-secondary-text">Reconciled</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 75px; width: 85%;"></div><span class="text-xs text-secondary-text">Reviewed</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 55px; width: 70%;"></div><span class="text-xs text-secondary-text">Delivered</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 30px; width: 50%;"></div><span class="text-xs text-secondary-text">Advisory</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 20px; width: 40%;"></div><span class="text-xs text-secondary-text">Signed Off</span></div>
+            <div class="dashboard-card p-4 sm:p-6 lg:col-span-2 reveal">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6"><h3 class="font-semibold text-base sm:text-lg">Bookkeeping Pipeline · April Close</h3><select class="bg-hover border border-border rounded-full px-4 py-2 text-xs font-medium uppercase w-fit"><option>All clients</option><option>Bookkeeping only</option><option>CFO+books</option></select></div>
+              <div class="overflow-x-auto custom-scrollbar pb-2">
+                <div class="h-64 min-w-[360px] flex items-end justify-between gap-2">
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 40px; width: 60%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">Collected</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 65px; width: 80%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">Categorized</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 90px; width: 95%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">Reconciled</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 75px; width: 85%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">Reviewed</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 55px; width: 70%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">Delivered</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 30px; width: 50%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">Advisory</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full chart-bar" style="height: 20px; width: 40%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">Signed Off</span></div>
+                </div>
               </div>
-              <div class="mt-6 pt-4 border-t border-border flex justify-between"><span class="text-secondary-text text-sm">On-time close rate</span><span class="font-semibold text-xl text-accent">92%</span></div>
+              <div class="mt-6 pt-4 border-t border-border flex justify-between items-center"><span class="text-secondary-text text-xs sm:text-sm">On-time close rate</span><span class="font-semibold text-lg sm:text-xl text-accent">92%</span></div>
             </div>
             <div class="dashboard-card p-6 reveal">
               <h3 class="font-semibold text-lg mb-4">Quick Actions</h3>
@@ -372,17 +379,26 @@
               <div class="flex gap-3"><button class="px-6 py-3 btn-primary text-xs font-semibold uppercase tracking-widest"><i class="fas fa-filter mr-1"></i> Filter</button></div>
             </div>
             <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-building text-accent text-xl"></i></div><div><p class="font-semibold">Nova Creative Studio · Growth Plan</p><p class="text-xs text-secondary-text mt-1">MRR $2,500 · Books due Day 5</p><div class="flex gap-3 mt-1 text-xs text-secondary-text"><span><i class="far fa-check-circle text-success"></i> On track</span><span><i class="fas fa-user-tie"></i> M. Chen</span></div></div></div>
-                <div><span class="status-badge active">Active</span></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0"><i class="fas fa-building text-accent text-lg sm:text-xl"></i></div>
+                  <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Nova Creative Studio · Growth Plan</p><p class="text-xs text-secondary-text mt-0.5">MRR $2,500 · Books due Day 5</p><div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs text-secondary-text"><span><i class="far fa-check-circle text-success"></i> On track</span><span><i class="fas fa-user-tie"></i> M. Chen</span></div></div>
+                </div>
+                <div class="self-start sm:self-center shrink-0"><span class="status-badge active">Active</span></div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-utensils text-accent text-xl"></i></div><div><p class="font-semibold">Harbor & Hearth Bistro · Books Plan</p><p class="text-xs text-secondary-text mt-1">MRR $850 · Books due Day 7</p><div class="flex gap-3 mt-1 text-xs text-secondary-text"><span><i class="fas fa-triangle-exclamation text-warning"></i> Flagged: missing receipts</span><span><i class="fas fa-user-tie"></i> R. Patel</span></div></div></div>
-                <div><span class="status-badge pending">At Risk</span></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0"><i class="fas fa-utensils text-accent text-lg sm:text-xl"></i></div>
+                  <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Harbor & Hearth Bistro · Books Plan</p><p class="text-xs text-secondary-text mt-0.5">MRR $850 · Books due Day 7</p><div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs text-secondary-text"><span><i class="fas fa-triangle-exclamation text-warning"></i> Flagged: missing receipts</span><span><i class="fas fa-user-tie"></i> R. Patel</span></div></div>
+                </div>
+                <div class="self-start sm:self-center shrink-0"><span class="status-badge pending">At Risk</span></div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center"><i class="fas fa-heart-pulse text-accent text-xl"></i></div><div><p class="font-semibold">BrightPath Health · CFO+Books</p><p class="text-xs text-secondary-text mt-1">MRR $4,200 · Books due Day 5</p><div class="flex gap-3 mt-1 text-xs text-secondary-text"><span><i class="far fa-check-circle text-success"></i> On track</span><span><i class="fas fa-user-tie"></i> M. Chen</span></div></div></div>
-                <div><span class="status-badge active">Active</span></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                  <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0"><i class="fas fa-heart-pulse text-accent text-lg sm:text-xl"></i></div>
+                  <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">BrightPath Health · CFO+Books</p><p class="text-xs text-secondary-text mt-0.5">MRR $4,200 · Books due Day 5</p><div class="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs text-secondary-text"><span><i class="far fa-check-circle text-success"></i> On track</span><span><i class="fas fa-user-tie"></i> M. Chen</span></div></div>
+                </div>
+                <div class="self-start sm:self-center shrink-0"><span class="status-badge active">Active</span></div>
               </div>
             </div>
             <div class="mt-6 p-4 bg-hover rounded-2xl text-sm"><i class="fas fa-info-circle text-accent mr-2"></i> Client health is based on receipt submission timeliness, close date adherence, and advisory engagement.</div>
@@ -422,9 +438,27 @@
           <div class="dashboard-card p-5 sm:p-7 reveal active">
             <h2 class="text-xl sm:text-2xl font-semibold text-primary-text mb-8 flex items-center gap-2"><span class="text-accent">🧑‍💼</span> CFO Assignments</h2>
             <div class="space-y-3">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i class="fas fa-user-tie"></i></div><div><p class="font-semibold">Michael Chen · Lead CFO</p><p class="text-xs text-secondary-text">8 clients · 2 calls this week</p></div></div><span class="status-badge active">Available</span></div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i class="fas fa-user-tie"></i></div><div><p class="font-semibold">Rachel Patel · Fractional CFO</p><p class="text-xs text-secondary-text">6 clients · 3 calls this week</p></div></div><span class="status-badge pending">Booked</span></div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i class="fas fa-user-tie"></i></div><div><p class="font-semibold">David Kim · Fractional CFO</p><p class="text-xs text-secondary-text">5 clients · 1 call this week</p></div></div><span class="status-badge active">Available</span></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0"><i class="fas fa-user-tie"></i></div>
+                  <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Michael Chen · Lead CFO</p><p class="text-xs text-secondary-text mt-0.5">8 clients · 2 calls this week</p></div>
+                </div>
+                <div class="self-start sm:self-center shrink-0"><span class="status-badge active">Available</span></div>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0"><i class="fas fa-user-tie"></i></div>
+                  <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Rachel Patel · Fractional CFO</p><p class="text-xs text-secondary-text mt-0.5">6 clients · 3 calls this week</p></div>
+                </div>
+                <div class="self-start sm:self-center shrink-0"><span class="status-badge pending">Booked</span></div>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0"><i class="fas fa-user-tie"></i></div>
+                  <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">David Kim · Fractional CFO</p><p class="text-xs text-secondary-text mt-0.5">5 clients · 1 call this week</p></div>
+                </div>
+                <div class="self-start sm:self-center shrink-0"><span class="status-badge active">Available</span></div>
+              </div>
             </div>
             <div class="mt-6 p-4 bg-hover rounded-2xl text-sm"><i class="fas fa-info-circle text-accent mr-2"></i> Advisory capacity is capped at 8 clients per CFO to maintain quality.</div>
           </div>
@@ -435,17 +469,17 @@
           <div class="dashboard-card p-5 sm:p-7 reveal active">
             <h2 class="text-xl sm:text-2xl font-semibold text-primary-text mb-8 flex items-center gap-2"><span class="text-accent">📄</span> Report Review Queue</h2>
             <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">Nova Creative Studio · April P&L</p><p class="text-xs text-secondary-text">Draft by R. Patel · awaiting partner sign-off</p></div>
-                <div class="flex gap-2"><span class="status-badge pending">Review</span><button class="text-accent"><i class="fas fa-check"></i></button></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Nova Creative Studio · April P&L</p><p class="text-xs text-secondary-text mt-0.5">Draft by R. Patel · awaiting partner sign-off</p></div>
+                <div class="flex items-center gap-2 self-start sm:self-center shrink-0"><span class="status-badge pending">Review</span><button class="text-accent p-1.5 hover:bg-hover rounded-lg"><i class="fas fa-check"></i></button></div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">BrightPath Health · April Balance Sheet</p><p class="text-xs text-secondary-text">Draft by M. Chen · awaiting partner sign-off</p></div>
-                <div class="flex gap-2"><span class="status-badge pending">Review</span><button class="text-accent"><i class="fas fa-check"></i></button></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">BrightPath Health · April Balance Sheet</p><p class="text-xs text-secondary-text mt-0.5">Draft by M. Chen · awaiting partner sign-off</p></div>
+                <div class="flex items-center gap-2 self-start sm:self-center shrink-0"><span class="status-badge pending">Review</span><button class="text-accent p-1.5 hover:bg-hover rounded-lg"><i class="fas fa-check"></i></button></div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">Harbor & Hearth Bistro · April Cash Flow</p><p class="text-xs text-secondary-text">Draft by R. Patel · flagged: missing receipts</p></div>
-                <div class="flex gap-2"><span class="status-badge cancelled">Flagged</span><button class="text-accent"><i class="fas fa-eye"></i></button></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Harbor & Hearth Bistro · April Cash Flow</p><p class="text-xs text-secondary-text mt-0.5">Draft by R. Patel · flagged: missing receipts</p></div>
+                <div class="flex items-center gap-2 self-start sm:self-center shrink-0"><span class="status-badge cancelled">Flagged</span><button class="text-accent p-1.5 hover:bg-hover rounded-lg"><i class="fas fa-eye"></i></button></div>
               </div>
             </div>
             <div class="mt-6 p-4 bg-hover rounded-2xl text-sm"><i class="fas fa-info-circle text-accent mr-2"></i> All reports require partner sign-off before client delivery.</div>
@@ -462,9 +496,18 @@
               <div class="p-6 bg-hover rounded-2xl"><h3 class="font-bold text-lg text-accent mb-2">Collected (MTD)</h3><p class="text-3xl font-bold">$82.3k</p><p class="text-xs text-success mt-1">87% of target</p></div>
             </div>
             <div class="space-y-3">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div><p class="font-semibold">Nova Creative Studio</p><p class="text-xs text-secondary-text">Growth Plan · $2,500/mo</p></div><span class="status-badge completed">Paid</span></div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div><p class="font-semibold">Harbor & Hearth Bistro</p><p class="text-xs text-secondary-text">Books Plan · $850/mo</p></div><span class="status-badge pending">Overdue</span></div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div><p class="font-semibold">BrightPath Health</p><p class="text-xs text-secondary-text">CFO+Books · $4,200/mo</p></div><span class="status-badge completed">Paid</span></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Nova Creative Studio</p><p class="text-xs text-secondary-text mt-0.5">Growth Plan · $2,500/mo</p></div>
+                <div class="self-start sm:self-center shrink-0"><span class="status-badge completed">Paid</span></div>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Harbor & Hearth Bistro</p><p class="text-xs text-secondary-text mt-0.5">Books Plan · $850/mo</p></div>
+                <div class="self-start sm:self-center shrink-0"><span class="status-badge pending">Overdue</span></div>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">BrightPath Health</p><p class="text-xs text-secondary-text mt-0.5">CFO+Books · $4,200/mo</p></div>
+                <div class="self-start sm:self-center shrink-0"><span class="status-badge completed">Paid</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -474,10 +517,10 @@
           <div class="dashboard-card p-5 sm:p-7 reveal active">
             <h2 class="text-xl sm:text-2xl font-semibold text-primary-text mb-8 flex items-center gap-2"><span class="text-accent">👨‍💼</span> Team Directory</h2>
             <div class="space-y-3">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i class="fas fa-user-tie"></i></div><div><p class="font-semibold">Michael Chen</p><p class="text-xs text-secondary-text">Lead CFO · CPA</p></div></div><span class="status-badge active">Online</span></div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i class="fas fa-user-tie"></i></div><div><p class="font-semibold">Rachel Patel</p><p class="text-xs text-secondary-text">Fractional CFO · CPA</p></div></div><span class="status-badge active">Online</span></div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i class="fas fa-user-tie"></i></div><div><p class="font-semibold">David Kim</p><p class="text-xs text-secondary-text">Fractional CFO</p></div></div><span class="status-badge pending">In meeting</span></div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i class="fas fa-user"></i></div><div><p class="font-semibold">Lisa Morgan</p><p class="text-xs text-secondary-text">Senior Bookkeeper</p></div></div><span class="status-badge active">Online</span></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3"><div class="flex items-center gap-3 min-w-0"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0"><i class="fas fa-user-tie"></i></div><div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Michael Chen</p><p class="text-xs text-secondary-text mt-0.5">Lead CFO · CPA</p></div></div><div class="self-start sm:self-center shrink-0"><span class="status-badge active">Online</span></div></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3"><div class="flex items-center gap-3 min-w-0"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0"><i class="fas fa-user-tie"></i></div><div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Rachel Patel</p><p class="text-xs text-secondary-text mt-0.5">Fractional CFO · CPA</p></div></div><div class="self-start sm:self-center shrink-0"><span class="status-badge active">Online</span></div></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3"><div class="flex items-center gap-3 min-w-0"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0"><i class="fas fa-user-tie"></i></div><div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">David Kim</p><p class="text-xs text-secondary-text mt-0.5">Fractional CFO</p></div></div><div class="self-start sm:self-center shrink-0"><span class="status-badge pending">In meeting</span></div></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3"><div class="flex items-center gap-3 min-w-0"><div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0"><i class="fas fa-user"></i></div><div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Lisa Morgan</p><p class="text-xs text-secondary-text mt-0.5">Senior Bookkeeper</p></div></div><div class="self-start sm:self-center shrink-0"><span class="status-badge active">Online</span></div></div>
             </div>
           </div>
         </div>

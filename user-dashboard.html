@@ -151,6 +151,11 @@
       transition: width 0.3s ease;
     }
     .status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      flex-shrink: 0;
       padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.7rem;
       font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
     }
@@ -292,15 +297,15 @@
 
         <!-- OVERVIEW / DASHBOARD -->
         <div id="overview" class="user-section">
-          <div class="dashboard-card p-5 sm:p-7 reveal active mb-6 bg-accent-gradient text-white">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div class="dashboard-card p-4 sm:p-7 reveal active mb-6 bg-accent-gradient text-white">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
-                <h2 class="text-2xl sm:text-3xl font-semibold mb-2">📊 Welcome back, Rachel</h2>
-                <p class="text-white/80 text-sm">Your financial health at a glance—cash flow, reports, and advisory updates.</p>
+                <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-1 sm:mb-2">📊 Welcome back, Rachel</h2>
+                <p class="text-white/80 text-xs sm:text-sm">Your financial health at a glance—cash flow, reports, and advisory updates.</p>
               </div>
-              <div class="flex gap-3">
-                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider">Today · Apr 09, 2026</span>
-                <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center gap-1"><i class="fas fa-circle text-success text-[6px]"></i> Books Current</span>
+              <div class="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider whitespace-nowrap">Today · Apr 09, 2026</span>
+                <span class="bg-white/20 backdrop-blur-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap"><i class="fas fa-circle text-emerald-300 text-[6px]"></i> Books Current</span>
               </div>
             </div>
           </div>
@@ -339,18 +344,20 @@
 
           <!-- Cash flow chart + quick action -->
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="dashboard-card p-6 lg:col-span-2 reveal">
-              <div class="flex justify-between items-center mb-6"><h3 class="font-semibold text-lg">13-Week Cash Flow Forecast</h3><select class="bg-hover border border-border rounded-full px-4 py-2 text-xs font-medium uppercase"><option>All accounts</option><option>Operating</option><option>Reserve</option></select></div>
-              <div class="h-64 flex items-end justify-between gap-2">
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 40px; width: 60%;"></div><span class="text-xs text-secondary-text">W1</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 65px; width: 80%;"></div><span class="text-xs text-secondary-text">W3</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 90px; width: 95%;"></div><span class="text-xs text-secondary-text">W5</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 75px; width: 85%;"></div><span class="text-xs text-secondary-text">W7</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 55px; width: 70%;"></div><span class="text-xs text-secondary-text">W9</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 30px; width: 50%;"></div><span class="text-xs text-secondary-text">W11</span></div>
-                <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 20px; width: 40%;"></div><span class="text-xs text-secondary-text">W13</span></div>
+            <div class="dashboard-card p-4 sm:p-6 lg:col-span-2 reveal">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6"><h3 class="font-semibold text-base sm:text-lg">13-Week Cash Flow Forecast</h3><select class="bg-hover border border-border rounded-full px-4 py-2 text-xs font-medium uppercase w-fit"><option>All accounts</option><option>Operating</option><option>Reserve</option></select></div>
+              <div class="overflow-x-auto custom-scrollbar pb-2">
+                <div class="h-64 min-w-[360px] flex items-end justify-between gap-2">
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 40px; width: 60%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">W1</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 65px; width: 80%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">W3</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 90px; width: 95%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">W5</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 75px; width: 85%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">W7</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 55px; width: 70%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">W9</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 30px; width: 50%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">W11</span></div>
+                  <div class="flex-1 flex flex-col items-center gap-2"><div class="w-full progress-bar" style="height: 20px; width: 40%;"></div><span class="text-[11px] sm:text-xs text-secondary-text">W13</span></div>
+                </div>
               </div>
-              <div class="mt-6 pt-4 border-t border-border flex justify-between"><span class="text-secondary-text text-sm">Projected balance · Week 13</span><span class="font-semibold text-xl text-accent">$528,400</span></div>
+              <div class="mt-6 pt-4 border-t border-border flex justify-between items-center"><span class="text-secondary-text text-xs sm:text-sm">Projected balance · Week 13</span><span class="font-semibold text-lg sm:text-xl text-accent">$528,400</span></div>
             </div>
             <div class="dashboard-card p-6 reveal">
               <h3 class="font-semibold text-lg mb-4">Quick Actions</h3>
@@ -387,21 +394,21 @@
           <div class="dashboard-card p-5 sm:p-7 reveal active">
             <h2 class="text-xl sm:text-2xl font-semibold text-primary-text mb-8 flex items-center gap-2"><span class="text-accent">📄</span> Financial Reports</h2>
             <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">March 2026 · Profit & Loss</p><p class="text-xs text-secondary-text">Apr 05, 2026 · Audit-grade</p><p class="text-xs text-accent mt-1"><i class="fas fa-check-circle"></i> Reviewed by CFO</p></div>
-                <div class="flex gap-2"><span class="status-badge completed">Ready</span><button class="text-accent"><i class="fas fa-download"></i></button></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">March 2026 · Profit & Loss</p><p class="text-xs text-secondary-text mt-0.5">Apr 05, 2026 · Audit-grade</p><p class="text-xs text-accent mt-1"><i class="fas fa-check-circle"></i> Reviewed by CFO</p></div>
+                <div class="flex items-center gap-2 self-start sm:self-center shrink-0"><span class="status-badge completed">Ready</span><button class="text-accent p-1.5 hover:bg-hover rounded-lg"><i class="fas fa-download"></i></button></div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">March 2026 · Balance Sheet</p><p class="text-xs text-secondary-text">Apr 05, 2026 · Audit-grade</p><p class="text-xs text-accent mt-1"><i class="fas fa-check-circle"></i> Reviewed by CFO</p></div>
-                <div class="flex gap-2"><span class="status-badge completed">Ready</span><button class="text-accent"><i class="fas fa-download"></i></button></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">March 2026 · Balance Sheet</p><p class="text-xs text-secondary-text mt-0.5">Apr 05, 2026 · Audit-grade</p><p class="text-xs text-accent mt-1"><i class="fas fa-check-circle"></i> Reviewed by CFO</p></div>
+                <div class="flex items-center gap-2 self-start sm:self-center shrink-0"><span class="status-badge completed">Ready</span><button class="text-accent p-1.5 hover:bg-hover rounded-lg"><i class="fas fa-download"></i></button></div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">March 2026 · Cash Flow Statement</p><p class="text-xs text-secondary-text">Apr 05, 2026 · Audit-grade</p><p class="text-xs text-accent mt-1"><i class="fas fa-check-circle"></i> Reviewed by CFO</p></div>
-                <div class="flex gap-2"><span class="status-badge completed">Ready</span><button class="text-accent"><i class="fas fa-download"></i></button></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">March 2026 · Cash Flow Statement</p><p class="text-xs text-secondary-text mt-0.5">Apr 05, 2026 · Audit-grade</p><p class="text-xs text-accent mt-1"><i class="fas fa-check-circle"></i> Reviewed by CFO</p></div>
+                <div class="flex items-center gap-2 self-start sm:self-center shrink-0"><span class="status-badge completed">Ready</span><button class="text-accent p-1.5 hover:bg-hover rounded-lg"><i class="fas fa-download"></i></button></div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">April 2026 · Month-End Close</p><p class="text-xs text-secondary-text">In progress · expected May 05</p><p class="text-xs text-warning mt-1"><i class="fas fa-clock"></i> Drafting</p></div>
-                <div class="flex gap-2"><span class="status-badge pending">In Progress</span><button class="text-secondary-text cursor-not-allowed"><i class="fas fa-download"></i></button></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">April 2026 · Month-End Close</p><p class="text-xs text-secondary-text mt-0.5">In progress · expected May 05</p><p class="text-xs text-warning mt-1"><i class="fas fa-clock"></i> Drafting</p></div>
+                <div class="flex items-center gap-2 self-start sm:self-center shrink-0"><span class="status-badge pending">In Progress</span><button class="text-secondary-text cursor-not-allowed p-1.5"><i class="fas fa-download"></i></button></div>
               </div>
             </div>
             <div class="mt-6 p-4 bg-hover rounded-2xl text-sm"><i class="fas fa-info-circle text-accent mr-2"></i> Reports are delivered by Day 5 of each month. Download individual statements or the full package.</div>
@@ -465,17 +472,17 @@
           <div class="dashboard-card p-5 sm:p-7 reveal active">
             <h2 class="text-xl sm:text-2xl font-semibold text-primary-text mb-8 flex items-center gap-2"><span class="text-accent">🧾</span> Invoices & Billing</h2>
             <div class="space-y-4">
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">Growth Plan · April 2026</p><p class="text-xs text-secondary-text">Due Apr 15, 2026 · Bookkeeping + CFO advisory</p></div>
-                <div class="flex gap-3 items-center"><span class="font-semibold">$2,500</span><span class="status-badge pending">Due</span></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Growth Plan · April 2026</p><p class="text-xs text-secondary-text mt-0.5">Due Apr 15, 2026 · Bookkeeping + CFO advisory</p></div>
+                <div class="flex gap-3 items-center self-start sm:self-center shrink-0"><span class="font-semibold text-accent">$2,500</span><span class="status-badge pending">Due</span></div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">Growth Plan · March 2026</p><p class="text-xs text-secondary-text">Paid Mar 15, 2026 · Bookkeeping + CFO advisory</p></div>
-                <div class="flex gap-3 items-center"><span class="font-semibold">$2,500</span><span class="status-badge completed">Paid</span></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Growth Plan · March 2026</p><p class="text-xs text-secondary-text mt-0.5">Paid Mar 15, 2026 · Bookkeeping + CFO advisory</p></div>
+                <div class="flex gap-3 items-center self-start sm:self-center shrink-0"><span class="font-semibold text-accent">$2,500</span><span class="status-badge completed">Paid</span></div>
               </div>
-              <div class="flex items-center justify-between p-4 bg-hover rounded-2xl">
-                <div><p class="font-semibold">Growth Plan · February 2026</p><p class="text-xs text-secondary-text">Paid Feb 15, 2026 · Bookkeeping + CFO advisory</p></div>
-                <div class="flex gap-3 items-center"><span class="font-semibold">$2,500</span><span class="status-badge completed">Paid</span></div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-hover rounded-2xl gap-3">
+                <div class="min-w-0"><p class="font-semibold text-sm sm:text-base leading-snug">Growth Plan · February 2026</p><p class="text-xs text-secondary-text mt-0.5">Paid Feb 15, 2026 · Bookkeeping + CFO advisory</p></div>
+                <div class="flex gap-3 items-center self-start sm:self-center shrink-0"><span class="font-semibold text-accent">$2,500</span><span class="status-badge completed">Paid</span></div>
               </div>
             </div>
             <div class="mt-6 p-4 bg-hover rounded-2xl text-sm"><i class="fas fa-info-circle text-accent mr-2"></i> All invoices are auto-billed to your card on file. View payment history for details.</div>

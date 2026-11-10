@@ -847,12 +847,12 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-20">
                 
                 <!-- Side 1: The Outdated Approach -->
-                <div class="rounded-3xl p-8 sm:p-10 bg-slate-100/70 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                <div class="rounded-3xl p-6 sm:p-10 bg-slate-100/70 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center justify-between mb-6">
+                        <div class="flex flex-col xs:flex-row xs:items-center sm:flex-row sm:items-center justify-between gap-3 mb-6">
                             <span class="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Status Quo</span>
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
-                                Reactive & Fragile
+                            <span class="self-start xs:self-auto px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 whitespace-nowrap">
+                                Reactive &amp; Fragile
                             </span>
                         </div>
                         <h3 class="text-2xl font-bold text-primary-text mb-4">Typical Freelancer or Generic Firm</h3>
@@ -900,17 +900,17 @@
                 </div>
 
                 <!-- Side 2: The LedgerPulse Strategic Partnership -->
-                <div class="relative rounded-3xl p-8 sm:p-10 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white border-2 border-emerald-500/40 shadow-2xl shadow-emerald-950/30 flex flex-col justify-between">
+                <div class="relative rounded-3xl p-6 sm:p-10 pt-10 sm:pt-10 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white border-2 border-emerald-500/40 shadow-2xl shadow-emerald-950/30 flex flex-col justify-between">
                     <!-- Glow badge -->
-                    <div class="absolute -top-3.5 right-8 bg-emerald-500 text-slate-950 text-[11px] font-extrabold uppercase tracking-widest px-4 py-1 rounded-full shadow-md">
+                    <div class="absolute -top-3.5 left-6 sm:left-auto sm:right-8 bg-emerald-500 text-slate-950 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest px-3.5 sm:px-4 py-1 rounded-full shadow-md whitespace-nowrap z-10">
                         Recommended Standard
                     </div>
 
                     <div>
-                        <div class="flex items-center justify-between mb-6">
+                        <div class="flex flex-col xs:flex-row xs:items-center sm:flex-row sm:items-center justify-between gap-3 mb-6">
                             <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">The LedgerPulse Standard</span>
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                                Proactive & Strategic
+                            <span class="self-start xs:self-auto px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 whitespace-nowrap">
+                                Proactive &amp; Strategic
                             </span>
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-4">Bookkeeping + Fractional CFO Combined</h3>
@@ -984,7 +984,7 @@
                     <div>
                         <h4 class="text-sm sm:text-base font-bold text-primary-text mb-1">CFO Growth Advisory</h4>
                         <p class="text-xs sm:text-sm text-secondary-text leading-relaxed">
-                            Budget vs actual variance analysis, customer acquisition economics, and profitability engineering.
+                            Budget vs actual variance analysis, customer acquisition economics, and proactive profitability engineering.
                         </p>
                     </div>
                 </div>
@@ -995,7 +995,7 @@
                     <div>
                         <h4 class="text-sm sm:text-base font-bold text-primary-text mb-1">Audit &amp; Diligence Ready</h4>
                         <p class="text-xs sm:text-sm text-secondary-text leading-relaxed">
-                            Structured data rooms ready on demand for investors, bank credit lines, and smooth tax handoffs.
+                            Structured data rooms ready on demand for investors, lenders, and tax handoffs.
                         </p>
                     </div>
                 </div>
@@ -1089,72 +1089,73 @@
                 <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-text mb-3">What clients say after the first quarter</h2>
                 <p class="text-sm sm:text-base text-secondary-text leading-relaxed">Real feedback from owners who switched to a monthly bookkeeping + CFO model.</p>
             </div>
-            <div class="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5 max-w-5xl mx-auto items-stretch">
+            <!-- Responsive Cards: 1 column on mobile, 3 columns on tablet and desktop -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto items-stretch">
                 <!-- Card 1 -->
-                <div class="bg-card-bg rounded-xl p-3 sm:p-4 md:p-5 border border-border shadow-sm flex flex-col justify-between h-full">
+                <div class="bg-card-bg rounded-2xl p-5 sm:p-6 border border-border shadow-sm flex flex-col justify-between h-full">
                     <div>
-                        <div class="flex gap-0.5 sm:gap-1 mb-2.5">
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                        <div class="flex gap-1 mb-3">
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
                         </div>
-                        <p class="text-[11px] sm:text-xs md:text-sm text-primary-text leading-relaxed mb-4">"I stopped dreading month-end. The reports are clean, the cash flow forecast changed how we plan hires."</p>
+                        <p class="text-xs sm:text-sm text-primary-text leading-relaxed mb-5">"I stopped dreading month-end. The reports are clean, the cash flow forecast changed how we plan hires."</p>
                     </div>
-                    <div class="flex items-center gap-2 sm:gap-3 pt-2 border-t border-border/50">
-                        <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-border shrink-0">
-                            <img src="assets/a3.jpg" alt="Client" class="w-full h-full object-cover">
+                    <div class="flex items-center gap-3 pt-3 border-t border-border/60">
+                        <div class="w-10 h-10 rounded-full overflow-hidden border border-border shrink-0">
+                            <img src="assets/a3.jpg" alt="Operations Director" class="w-full h-full object-cover">
                         </div>
-                        <div class="text-[10px] sm:text-xs min-w-0">
+                        <div class="text-xs min-w-0">
                             <div class="font-bold text-primary-text truncate">Operations Director</div>
-                            <div class="text-secondary-text truncate">Digital Agency</div>
+                            <div class="text-secondary-text truncate text-[11px]">Digital Agency</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="bg-card-bg rounded-xl p-3 sm:p-4 md:p-5 border border-border shadow-sm flex flex-col justify-between h-full">
+                <div class="bg-card-bg rounded-2xl p-5 sm:p-6 border border-border shadow-sm flex flex-col justify-between h-full">
                     <div>
-                        <div class="flex gap-0.5 sm:gap-1 mb-2.5">
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                        <div class="flex gap-1 mb-3">
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
                         </div>
-                        <p class="text-[11px] sm:text-xs md:text-sm text-primary-text leading-relaxed mb-4">"The budget variance reports are the first financial documents I actually read. Clear, brief, and actionable."</p>
+                        <p class="text-xs sm:text-sm text-primary-text leading-relaxed mb-5">"The budget variance reports are the first financial documents I actually read. Clear, brief, and actionable."</p>
                     </div>
-                    <div class="flex items-center gap-2 sm:gap-3 pt-2 border-t border-border/50">
-                        <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-border shrink-0">
-                            <img src="assets/a4.jpg" alt="Client" class="w-full h-full object-cover">
+                    <div class="flex items-center gap-3 pt-3 border-t border-border/60">
+                        <div class="w-10 h-10 rounded-full overflow-hidden border border-border shrink-0">
+                            <img src="assets/a4.jpg" alt="Founder" class="w-full h-full object-cover">
                         </div>
-                        <div class="text-[10px] sm:text-xs min-w-0">
+                        <div class="text-xs min-w-0">
                             <div class="font-bold text-primary-text truncate">Founder</div>
-                            <div class="text-secondary-text truncate">E-commerce Brand</div>
+                            <div class="text-secondary-text truncate text-[11px]">E-commerce Brand</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="bg-card-bg rounded-xl p-3 sm:p-4 md:p-5 border border-border shadow-sm flex flex-col justify-between h-full">
+                <div class="bg-card-bg rounded-2xl p-5 sm:p-6 border border-border shadow-sm flex flex-col justify-between h-full">
                     <div>
-                        <div class="flex gap-0.5 sm:gap-1 mb-2.5">
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
-                            <i class="fa-solid fa-star text-amber-400 text-[10px] sm:text-xs"></i>
+                        <div class="flex gap-1 mb-3">
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+                            <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
                         </div>
-                        <p class="text-[11px] sm:text-xs md:text-sm text-primary-text leading-relaxed mb-4">"Having a CFO on call without the salary is exactly what a growing practice needs. Responsive and practical."</p>
+                        <p class="text-xs sm:text-sm text-primary-text leading-relaxed mb-5">"Having a CFO on call without the salary is exactly what a growing practice needs. Responsive and practical."</p>
                     </div>
-                    <div class="flex items-center gap-2 sm:gap-3 pt-2 border-t border-border/50">
-                        <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-border shrink-0">
-                            <img src="assets/f1.jpg" alt="Client" class="w-full h-full object-cover">
+                    <div class="flex items-center gap-3 pt-3 border-t border-border/60">
+                        <div class="w-10 h-10 rounded-full overflow-hidden border border-border shrink-0">
+                            <img src="assets/f1.jpg" alt="Managing Partner" class="w-full h-full object-cover">
                         </div>
-                        <div class="text-[10px] sm:text-xs min-w-0">
+                        <div class="text-xs min-w-0">
                             <div class="font-bold text-primary-text truncate">Managing Partner</div>
-                            <div class="text-secondary-text truncate">Professional Practice</div>
+                            <div class="text-secondary-text truncate text-[11px]">Professional Practice</div>
                         </div>
                     </div>
                 </div>
