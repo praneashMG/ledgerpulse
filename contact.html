@@ -987,8 +987,8 @@
     <footer id="main-footer" class="pt-14 transition-colors duration-300"
         style="background-color: var(--color-footer-bg);">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8 pb-10 border-b border-slate-700">
-                <div class="col-span-2 md:col-span-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-slate-700/60">
+                <div class="sm:col-span-2 lg:col-span-4">
                     <a href="index.html" class="flex items-center gap-3 mb-4 group inline-flex">
                         <div class="w-11 h-11 rounded-xl bg-white p-1 shadow-md border border-slate-700 flex items-center justify-center overflow-hidden">
                             <img src="assets/logo.png" alt="LedgerPulse Logo" class="w-full h-full object-contain">
@@ -1002,40 +1002,42 @@
                             </span>
                         </div>
                     </a>
-                    <p class="text-sm leading-relaxed max-w-xs text-slate-300">Empowering growing businesses and startups with clear bookkeeping, forecasting, and fractional CFO advisory for confident financial decisions.</p>
+                    <p class="text-sm leading-relaxed max-w-sm text-slate-300">Empowering growing businesses and startups with clear bookkeeping, forecasting, and fractional CFO advisory for confident financial decisions.</p>
                     <div class="flex space-x-4 rtl:space-x-reverse mt-6">
-                        <a href="#" class="text-slate-300 hover:text-accent transition"><i
-                                class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="text-slate-300 hover:text-accent transition"><i
-                                class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-slate-300 hover:text-accent transition"><i
-                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:bg-emerald-600 hover:border-emerald-500 transition"><i
+                                class="fab fa-linkedin-in text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:bg-emerald-600 hover:border-emerald-500 transition"><i
+                                class="fab fa-twitter text-xs"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-white hover:bg-emerald-600 hover:border-emerald-500 transition"><i
+                                class="fab fa-facebook-f text-xs"></i></a>
                     </div>
                 </div>
-                <div>
-                    <h4 class="text-lg font-medium mb-4 text-accent">Services</h4>
-                    <ul class="space-y-2">
+                <div class="lg:col-span-2">
+                    <h4 class="text-base sm:text-lg font-bold mb-4 text-emerald-400 tracking-wide uppercase text-xs sm:text-sm">Services</h4>
+                    <ul class="space-y-2.5 text-sm">
                         <li><a href="services.html" class="footer-link">Full-Charge Bookkeeping</a></li>
                         <li><a href="services.html" class="footer-link">Fractional CFO Advisory</a></li>
                         <li><a href="services.html" class="footer-link">Cash Flow Forecasting</a></li>
                         <li><a href="services.html" class="footer-link">Tax Readiness & Reporting</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4 class="text-lg font-medium mb-4 text-accent">Quick Links</h4>
-                    <ul class="space-y-2">
+                <div class="lg:col-span-2">
+                    <h4 class="text-base sm:text-lg font-bold mb-4 text-emerald-400 tracking-wide uppercase text-xs sm:text-sm">Quick Links</h4>
+                    <ul class="space-y-2.5 text-sm">
                         <li><a href="index.html" class="footer-link">Home</a></li>
                         <li><a href="services.html" class="footer-link">Services</a></li>
                         <li><a href="pricing.html" class="footer-link">Pricing Plans</a></li>
                         <li><a href="contact.html" class="footer-link">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-span-2 md:col-span-2 lg:col-span-1">
-                    <h4 class="font-medium text-lg mb-4 text-accent">Financial Insights</h4>
-                    <p class="max-w-3xl text-sm mb-4 text-slate-300">Get monthly CFO briefings, tax alerts, and cash flow playbooks.</p>
-                    <input type="email" placeholder="Your business email"
-                        class="p-3 text-sm rounded-lg w-full bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-accent text-white outline-none">
-                    <button class="btn-accent font-semibold py-3 rounded-lg w-full mt-3">Subscribe</button>
+                <div class="sm:col-span-2 lg:col-span-4">
+                    <h4 class="font-bold text-base sm:text-lg mb-2 text-emerald-400 tracking-wide uppercase text-xs sm:text-sm">Financial Insights</h4>
+                    <p class="text-sm mb-4 text-slate-300 leading-relaxed">Get monthly CFO briefings, tax alerts, and cash flow playbooks.</p>
+                    <form onsubmit="event.preventDefault();" class="space-y-3">
+                        <input type="email" placeholder="Your business email"
+                            class="p-3 text-sm rounded-lg w-full bg-slate-800/90 border border-slate-700 focus:ring-2 focus:ring-accent text-white placeholder:text-slate-400 outline-none">
+                        <button type="submit" class="btn-accent font-semibold py-3 rounded-lg w-full">Subscribe</button>
+                    </form>
                 </div>
             </div>
             <div class="py-4 text-center text-xs text-slate-300">&copy; 2026 LedgerPulse Bookkeeping & Fractional CFO Services. All rights reserved. | <span class="hover:text-accent cursor-pointer">Privacy Policy</span> | <span class="hover:text-accent cursor-pointer">Terms of Service</span></div>
